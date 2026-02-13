@@ -25,14 +25,22 @@ app = FastAPI(
 # Load the best model from MLflow artifacts
 def load_best_model():
     """Load the best performing model from MLflow runs"""
-    # Try to load a trained model from mlflow directory
-    model_paths = [
-        "./mlflow/282570187416666551/models/m-814d16bc57f742d8a7b6b0447842c850/artifacts/model.pkl",
-        "./mlflows/126946449638471464/models/m-cded601c5c9d40efb0c71907b80c417e/artifacts/model.pkl",
-    ]
+    # Search for models in mlflow directories using glob patterns
+    mlflow_dirs = ["./mlflow", "./mlflows"]
     
-    for model_path in model_paths:
-        if Path(model_path).exists():
+    for mlflow_dir in mlflow_dirs:
+        mlflow_path = Path(mlflow_dir)
+        if not mlflow_path.exists():
+            continue
+        
+        # Find all model.pkl files in the mlflow directory
+        model_files = list(mlflow_path.glob("**/models/**/artifacts/model.pkl"))
+        
+        if model_files:
+            # Use the most recently modified model
+            model_files.sort(key=lambda x: x.stat().st_mtime, reverse=True)
+            model_path = model_files[0]
+            
             try:
                 model = joblib.load(model_path)
                 print(f"✅ Loaded model from: {model_path}")
@@ -125,7 +133,17 @@ async def detect_tables_complete(file: UploadFile) -> JSONResponse:
         # Read the uploaded Excel file
         contents = await file.read()
         excel_file = io.BytesIO(contents)
-        df = pd.read_excel(excel_file)
+        
+        try:
+            df = pd.read_excel(excel_file)
+        except ValueError as e:
+            raise HTTPException(status_code=400, detail=f"Invalid Excel file format: {str(e)}")
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"Unable to read Excel file. Please ensure it's a valid .xlsx or .xls file: {str(e)}")
+        
+        # Check if file is empty
+        if df.empty:
+            raise HTTPException(status_code=400, detail="Excel file is empty. Please upload a file with data.")
         
         # Step 1: Extract structural features
         structural_df = extract_structural_features(df)

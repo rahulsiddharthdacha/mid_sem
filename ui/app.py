@@ -6,6 +6,8 @@ import sys
 import logging
 import os
 import subprocess
+import requests
+import json
 
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -179,7 +181,6 @@ def show_upload_detect():
                 # API Server status check
                 api_url = "http://localhost:8000"
                 try:
-                    import requests
                     health_response = requests.get(f"{api_url}/health", timeout=2)
                     if health_response.status_code == 200:
                         health_data = health_response.json()
@@ -199,8 +200,6 @@ def show_upload_detect():
                 if api_available and st.button("🔍 Detect Tables with ML Model", type="primary"):
                     with st.spinner("Detecting tables using trained ML model..."):
                         try:
-                            import requests
-                            
                             # Reset file pointer
                             uploaded_file.seek(0)
                             
@@ -242,9 +241,15 @@ def show_upload_detect():
                                     # Create a copy of the dataframe for display
                                     display_df = df.copy()
                                     
-                                    # Highlight header row (row 0 typically)
+                                    # Get actual header row indices from detection results
+                                    header_rows = set(h['row'] for h in headers)
+                                    
+                                    # Highlight header rows based on detection
                                     def highlight_headers(row):
-                                        return ['background-color: #90EE90' if row.name == 0 else '' for _ in row]
+                                        if row.name in header_rows:
+                                            return ['background-color: #90EE90' for _ in row]
+                                        else:
+                                            return ['' for _ in row]
                                     
                                     styled_df = display_df.head(10).style.apply(highlight_headers, axis=1)
                                     st.dataframe(styled_df, use_container_width=True)
@@ -273,7 +278,6 @@ def show_upload_detect():
                                 st.markdown("---")
                                 st.subheader("💾 Download Results")
                                 
-                                import json
                                 json_str = json.dumps(result, indent=2)
                                 st.download_button(
                                     label="📥 Download Detection Results (JSON)",
