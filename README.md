@@ -22,8 +22,6 @@ mid_sem/
 │   ├── structural_features.py    # Structural metadata extraction
 │   ├── semantic_features.py      # Semantic embeddings
 │   └── features.csv              # Extracted features (generated)
-├── ingestion/            # Data ingestion and parsing
-│   └── excel_parser.py
 ├── model/                # Model training scripts
 │   └── train_model.py
 ├── serving/              # Model serving API
@@ -50,6 +48,8 @@ mid_sem/
    ```bash
    pip install -r requirements.txt
    ```
+
+**Note:** The first run of feature extraction will download the `all-MiniLM-L6-v2` sentence transformer model from HuggingFace (~80MB). This requires an internet connection.
 
 ## Usage
 
