@@ -6,6 +6,8 @@ import sys
 import logging
 import os
 import subprocess
+import requests
+import json
 
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -172,37 +174,161 @@ def show_upload_detect():
                 info_col2.metric("Columns", df.shape[1])
                 info_col3.metric("Missing Values", df.isnull().sum().sum())
                 
-                # Extract features button
+                # Detect Tables using API
                 st.markdown("---")
-                st.subheader("Feature Extraction")
+                st.subheader("🤖 Table Detection with ML Model")
                 
-                if st.button("🔍 Extract Structural Features", type="primary"):
-                    with st.spinner("Extracting features from cells..."):
-                        # Extract structural features
-                        features_df = extract_structural_features(df)
-                        st.session_state.features_df = features_df
-                        
-                        st.success(f"✅ Extracted {len(features_df)} cell-level features!")
-                        
-                        # Show feature preview
-                        st.dataframe(features_df.head(20), use_container_width=True)
-                        
-                        # Feature statistics
-                        st.subheader("Feature Statistics")
-                        stat_col1, stat_col2, stat_col3, stat_col4 = st.columns(4)
-                        stat_col1.metric("Total Cells", len(features_df))
-                        stat_col2.metric("Empty Cells", int(features_df['is_empty'].sum()))
-                        stat_col3.metric("Numeric Cells", int(features_df['is_numeric'].sum()))
-                        stat_col4.metric("Text Cells", len(features_df) - int(features_df['is_empty'].sum()) - int(features_df['is_numeric'].sum()))
-                        
-                        # Download features
-                        csv = features_df.to_csv(index=False)
-                        st.download_button(
-                            label="📥 Download Features CSV",
-                            data=csv,
-                            file_name="extracted_features.csv",
-                            mime="text/csv"
-                        )
+                # API Server status check
+                api_url = "http://localhost:8000"
+                try:
+                    health_response = requests.get(f"{api_url}/health", timeout=2)
+                    if health_response.status_code == 200:
+                        health_data = health_response.json()
+                        if health_data.get('model_loaded'):
+                            st.success("✅ API server is running and model is loaded")
+                            api_available = True
+                        else:
+                            st.warning("⚠️ API server is running but model is not loaded")
+                            api_available = False
+                    else:
+                        st.error("❌ API server error")
+                        api_available = False
+                except Exception as e:
+                    st.error("❌ API server is not running. Please start it with: `uvicorn serving.app:app --host 0.0.0.0 --port 8000`")
+                    api_available = False
+                
+                if api_available and st.button("🔍 Detect Tables with ML Model", type="primary"):
+                    with st.spinner("Detecting tables using trained ML model..."):
+                        try:
+                            # Reset file pointer
+                            uploaded_file.seek(0)
+                            
+                            # Call the API
+                            files = {"file": (uploaded_file.name, uploaded_file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
+                            response = requests.post(f"{api_url}/detect-tables", files=files, timeout=30)
+                            
+                            if response.status_code == 200:
+                                result = response.json()
+                                st.session_state.predictions = result
+                                
+                                st.success("✅ Table detection completed!")
+                                
+                                # Display summary
+                                st.markdown("---")
+                                st.subheader("📊 Detection Summary")
+                                
+                                summary = result.get('summary', {})
+                                sum_col1, sum_col2, sum_col3, sum_col4 = st.columns(4)
+                                sum_col1.metric("Total Cells", summary.get('total_cells', 0))
+                                sum_col2.metric("Header Cells", summary.get('header_cells', 0))
+                                sum_col3.metric("Data Cells", summary.get('data_cells', 0))
+                                dims = summary.get('dimensions', {})
+                                sum_col4.metric("Dimensions", f"{dims.get('rows', 0)}×{dims.get('columns', 0)}")
+                                
+                                # Display detected headers
+                                st.markdown("---")
+                                st.subheader("📌 Detected Headers")
+                                headers = result.get('detected_tables', {}).get('headers', [])
+                                
+                                if headers:
+                                    headers_df = pd.DataFrame(headers)
+                                    st.dataframe(headers_df, use_container_width=True)
+                                    
+                                    # Visualize headers on the original data
+                                    st.markdown("---")
+                                    st.subheader("📋 Headers Highlighted in Data")
+                                    
+                                    # Create a copy of the dataframe for display
+                                    display_df = df.copy()
+                                    
+                                    # Get actual header row indices from detection results
+                                    header_rows = set(h['row'] for h in headers)
+                                    
+                                    # Highlight header rows based on detection
+                                    def highlight_headers(row):
+                                        if row.name in header_rows:
+                                            return ['background-color: #90EE90' for _ in row]
+                                        else:
+                                            return ['' for _ in row]
+                                    
+                                    styled_df = display_df.head(10).style.apply(highlight_headers, axis=1)
+                                    st.dataframe(styled_df, use_container_width=True)
+                                else:
+                                    st.info("No headers detected")
+                                
+                                # Display sample data rows
+                                st.markdown("---")
+                                st.subheader("📊 Sample Data Rows")
+                                data_rows = result.get('detected_tables', {}).get('data', [])
+                                
+                                if data_rows:
+                                    st.write(f"Total data rows: {len(data_rows)}")
+                                    
+                                    # Show first few data rows
+                                    num_rows_to_show = min(5, len(data_rows))
+                                    for i in range(num_rows_to_show):
+                                        row = data_rows[i]
+                                        with st.expander(f"Row {row['row_number']} ({len(row['cells'])} cells)"):
+                                            cells_df = pd.DataFrame(row['cells'])
+                                            st.dataframe(cells_df, use_container_width=True)
+                                else:
+                                    st.info("No data rows detected")
+                                
+                                # Download JSON result
+                                st.markdown("---")
+                                st.subheader("💾 Download Results")
+                                
+                                json_str = json.dumps(result, indent=2)
+                                st.download_button(
+                                    label="📥 Download Detection Results (JSON)",
+                                    data=json_str,
+                                    file_name=f"table_detection_{uploaded_file.name}.json",
+                                    mime="application/json"
+                                )
+                                
+                                # Show raw JSON in expander
+                                with st.expander("🔍 View Raw JSON Response"):
+                                    st.json(result)
+                                
+                            else:
+                                st.error(f"❌ API Error: {response.status_code} - {response.text}")
+                                
+                        except Exception as e:
+                            st.error(f"❌ Error calling API: {e}")
+                            logger.error(f"Error calling detection API: {e}")
+                
+                # Extract features button (for advanced users)
+                st.markdown("---")
+                st.subheader("🔬 Advanced: Feature Extraction Only")
+                
+                with st.expander("Extract Features Without Detection"):
+                    if st.button("🔍 Extract Structural Features"):
+                        with st.spinner("Extracting features from cells..."):
+                            # Extract structural features
+                            features_df = extract_structural_features(df)
+                            st.session_state.features_df = features_df
+                            
+                            st.success(f"✅ Extracted {len(features_df)} cell-level features!")
+                            
+                            # Show feature preview
+                            st.dataframe(features_df.head(20), use_container_width=True)
+                            
+                            # Feature statistics
+                            st.subheader("Feature Statistics")
+                            stat_col1, stat_col2, stat_col3, stat_col4 = st.columns(4)
+                            stat_col1.metric("Total Cells", len(features_df))
+                            stat_col2.metric("Empty Cells", int(features_df['is_empty'].sum()))
+                            stat_col3.metric("Numeric Cells", int(features_df['is_numeric'].sum()))
+                            stat_col4.metric("Text Cells", len(features_df) - int(features_df['is_empty'].sum()) - int(features_df['is_numeric'].sum()))
+                            
+                            # Download features
+                            csv = features_df.to_csv(index=False)
+                            st.download_button(
+                                label="📥 Download Features CSV",
+                                data=csv,
+                                file_name="extracted_features.csv",
+                                mime="text/csv"
+                            )
                 
             except Exception as e:
                 st.error(f"❌ Error processing file: {e}")
@@ -220,25 +346,24 @@ def show_upload_detect():
         - Choose your Excel file
         - Supports .xlsx and .xls
         
-        2️⃣ **Extract Features**
-        - Cell position (row, col)
-        - Empty/numeric indicators
-        - Row and column density
-        - Cell content
+        2️⃣ **Detect Tables**
+        - Click "Detect Tables" button
+        - ML model analyzes cells
+        - Returns JSON with results
         
-        3️⃣ **Detect Tables**
-        - ML model predicts headers
-        - Identifies table regions
-        - Highlights boundaries
+        3️⃣ **View Results**
+        - See detected headers
+        - View data organization
+        - Download JSON output
         
-        **Features Extracted:**
-        - `row_idx`: Row position
-        - `col_idx`: Column position
-        - `is_empty`: Empty cell flag
-        - `is_numeric`: Numeric flag
-        - `row_density`: Fill ratio
-        - `col_density`: Fill ratio
-        - `text`: Cell content
+        **What You Get:**
+        - Summary statistics
+        - Detected header cells
+        - Organized data rows
+        - Downloadable JSON
+        
+        **Complete Cycle:**
+        Upload → Detect → JSON Output
         """)
 
 def show_sample_data():
