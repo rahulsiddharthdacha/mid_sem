@@ -27,10 +27,13 @@ def extract_semantic_features(text_series):
     model = get_model()
 
     for text in text_series:
+        # Convert to string if not already
+        text_str = str(text) if not isinstance(text, str) else text
+        
         # If model is not available or text is empty/numeric, use zeros
-        if model is None or text.strip() == "" or text.isnumeric():
+        if model is None or text_str.strip() == "" or text_str.isnumeric():
             embeddings.append(np.zeros(384))
         else:
-            embeddings.append(model.encode(text))
+            embeddings.append(model.encode(text_str))
 
     return np.vstack(embeddings)

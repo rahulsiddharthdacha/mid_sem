@@ -1,13 +1,13 @@
 {
   "status": "success",
-  "filename": "inventory_report.xlsx",
+  "filename": "financial_statement.xlsx",
   "summary": {
-    "total_cells": 200,
+    "total_cells": 75,
     "header_cells": 0,
-    "data_cells": 200,
+    "data_cells": 75,
     "dimensions": {
-      "rows": 25,
-      "columns": 8
+      "rows": 15,
+      "columns": 5
     }
   },
   "detected_tables": {
@@ -19,42 +19,27 @@
           {
             "row": 0,
             "column": 0,
-            "value": "ITM0001"
+            "value": "Revenue"
           },
           {
             "row": 0,
             "column": 1,
-            "value": "Widget A"
+            "value": "500000.0"
           },
           {
             "row": 0,
             "column": 2,
-            "value": "Electronics"
+            "value": "650000.0"
           },
           {
             "row": 0,
             "column": 3,
-            "value": "250"
+            "value": "780000.0"
           },
           {
             "row": 0,
             "column": 4,
-            "value": "45.5"
-          },
-          {
-            "row": 0,
-            "column": 5,
-            "value": "11375.0"
-          },
-          {
-            "row": 0,
-            "column": 6,
-            "value": "100"
-          },
-          {
-            "row": 0,
-            "column": 7,
-            "value": "Supplier A"
+            "value": "20.0"
           }
         ]
       },
@@ -64,42 +49,27 @@
           {
             "row": 1,
             "column": 0,
-            "value": "ITM0002"
+            "value": "Cost of Goods Sold"
           },
           {
             "row": 1,
             "column": 1,
-            "value": "Widget B"
+            "value": "200000.0"
           },
           {
             "row": 1,
             "column": 2,
-            "value": "Electronics"
+            "value": "260000.0"
           },
           {
             "row": 1,
             "column": 3,
-            "value": "180"
+            "value": "312000.0"
           },
           {
             "row": 1,
             "column": 4,
-            "value": "38.75"
-          },
-          {
-            "row": 1,
-            "column": 5,
-            "value": "6975.0"
-          },
-          {
-            "row": 1,
-            "column": 6,
-            "value": "80"
-          },
-          {
-            "row": 1,
-            "column": 7,
-            "value": "Supplier A"
+            "value": "20.0"
           }
         ]
       },
@@ -109,42 +79,27 @@
           {
             "row": 2,
             "column": 0,
-            "value": "ITM0003"
+            "value": "Gross Profit"
           },
           {
             "row": 2,
             "column": 1,
-            "value": "Gadget X"
+            "value": "300000.0"
           },
           {
             "row": 2,
             "column": 2,
-            "value": "Electronics"
+            "value": "390000.0"
           },
           {
             "row": 2,
             "column": 3,
-            "value": "95"
+            "value": "468000.0"
           },
           {
             "row": 2,
             "column": 4,
-            "value": "125.0"
-          },
-          {
-            "row": 2,
-            "column": 5,
-            "value": "11875.0"
-          },
-          {
-            "row": 2,
-            "column": 6,
-            "value": "50"
-          },
-          {
-            "row": 2,
-            "column": 7,
-            "value": "Supplier B"
+            "value": "20.0"
           }
         ]
       },
@@ -154,42 +109,27 @@
           {
             "row": 3,
             "column": 0,
-            "value": "ITM0004"
+            "value": ""
           },
           {
             "row": 3,
             "column": 1,
-            "value": "Gadget Y"
+            "value": ""
           },
           {
             "row": 3,
             "column": 2,
-            "value": "Electronics"
+            "value": ""
           },
           {
             "row": 3,
             "column": 3,
-            "value": "120"
+            "value": ""
           },
           {
             "row": 3,
             "column": 4,
-            "value": "89.99"
-          },
-          {
-            "row": 3,
-            "column": 5,
-            "value": "10798.8"
-          },
-          {
-            "row": 3,
-            "column": 6,
-            "value": "60"
-          },
-          {
-            "row": 3,
-            "column": 7,
-            "value": "Supplier B"
+            "value": ""
           }
         ]
       },
@@ -199,42 +139,27 @@
           {
             "row": 4,
             "column": 0,
-            "value": "ITM0005"
+            "value": "Operating Expenses"
           },
           {
             "row": 4,
             "column": 1,
-            "value": "Tool Set"
+            "value": ""
           },
           {
             "row": 4,
             "column": 2,
-            "value": "Tools"
+            "value": ""
           },
           {
             "row": 4,
             "column": 3,
-            "value": "45"
+            "value": ""
           },
           {
             "row": 4,
             "column": 4,
-            "value": "320.0"
-          },
-          {
-            "row": 4,
-            "column": 5,
-            "value": "14400.0"
-          },
-          {
-            "row": 4,
-            "column": 6,
-            "value": "20"
-          },
-          {
-            "row": 4,
-            "column": 7,
-            "value": "Supplier C"
+            "value": ""
           }
         ]
       },
@@ -244,42 +169,27 @@
           {
             "row": 5,
             "column": 0,
-            "value": "ITM0006"
+            "value": "Salaries"
           },
           {
             "row": 5,
             "column": 1,
-            "value": "Component 1"
+            "value": "80000.0"
           },
           {
             "row": 5,
             "column": 2,
-            "value": "Parts"
+            "value": "95000.0"
           },
           {
             "row": 5,
             "column": 3,
-            "value": "520"
+            "value": "110000.0"
           },
           {
             "row": 5,
             "column": 4,
-            "value": "12.3"
-          },
-          {
-            "row": 5,
-            "column": 5,
-            "value": "6396.0"
-          },
-          {
-            "row": 5,
-            "column": 6,
-            "value": "200"
-          },
-          {
-            "row": 5,
-            "column": 7,
-            "value": "Supplier D"
+            "value": "15.8"
           }
         ]
       },
@@ -289,42 +199,27 @@
           {
             "row": 6,
             "column": 0,
-            "value": "ITM0007"
+            "value": "Rent"
           },
           {
             "row": 6,
             "column": 1,
-            "value": "Component 2"
+            "value": "24000.0"
           },
           {
             "row": 6,
             "column": 2,
-            "value": "Parts"
+            "value": "24000.0"
           },
           {
             "row": 6,
             "column": 3,
-            "value": "380"
+            "value": "26000.0"
           },
           {
             "row": 6,
             "column": 4,
-            "value": "18.45"
-          },
-          {
-            "row": 6,
-            "column": 5,
-            "value": "7011.0"
-          },
-          {
-            "row": 6,
-            "column": 6,
-            "value": "150"
-          },
-          {
-            "row": 6,
-            "column": 7,
-            "value": "Supplier D"
+            "value": "8.3"
           }
         ]
       },
@@ -334,42 +229,27 @@
           {
             "row": 7,
             "column": 0,
-            "value": "ITM0008"
+            "value": "Utilities"
           },
           {
             "row": 7,
             "column": 1,
-            "value": "Part A"
+            "value": "12000.0"
           },
           {
             "row": 7,
             "column": 2,
-            "value": "Parts"
+            "value": "13500.0"
           },
           {
             "row": 7,
             "column": 3,
-            "value": "610"
+            "value": "14500.0"
           },
           {
             "row": 7,
             "column": 4,
-            "value": "8.9"
-          },
-          {
-            "row": 7,
-            "column": 5,
-            "value": "5429.0"
-          },
-          {
-            "row": 7,
-            "column": 6,
-            "value": "250"
-          },
-          {
-            "row": 7,
-            "column": 7,
-            "value": "Supplier E"
+            "value": "7.4"
           }
         ]
       },
@@ -379,42 +259,27 @@
           {
             "row": 8,
             "column": 0,
-            "value": "ITM0009"
+            "value": "Marketing"
           },
           {
             "row": 8,
             "column": 1,
-            "value": "Part B"
+            "value": "35000.0"
           },
           {
             "row": 8,
             "column": 2,
-            "value": "Parts"
+            "value": "45000.0"
           },
           {
             "row": 8,
             "column": 3,
-            "value": "425"
+            "value": "55000.0"
           },
           {
             "row": 8,
             "column": 4,
-            "value": "15.6"
-          },
-          {
-            "row": 8,
-            "column": 5,
-            "value": "6630.0"
-          },
-          {
-            "row": 8,
-            "column": 6,
-            "value": "180"
-          },
-          {
-            "row": 8,
-            "column": 7,
-            "value": "Supplier E"
+            "value": "22.2"
           }
         ]
       },
@@ -424,42 +289,27 @@
           {
             "row": 9,
             "column": 0,
-            "value": "ITM0010"
+            "value": "Total Operating Expenses"
           },
           {
             "row": 9,
             "column": 1,
-            "value": "Material C"
+            "value": "151000.0"
           },
           {
             "row": 9,
             "column": 2,
-            "value": "Raw Materials"
+            "value": "177500.0"
           },
           {
             "row": 9,
             "column": 3,
-            "value": "890"
+            "value": "205500.0"
           },
           {
             "row": 9,
             "column": 4,
-            "value": "5.25"
-          },
-          {
-            "row": 9,
-            "column": 5,
-            "value": "4672.5"
-          },
-          {
-            "row": 9,
-            "column": 6,
-            "value": "400"
-          },
-          {
-            "row": 9,
-            "column": 7,
-            "value": "Supplier F"
+            "value": "15.8"
           }
         ]
       },
@@ -469,42 +319,27 @@
           {
             "row": 10,
             "column": 0,
-            "value": "ITM0011"
+            "value": ""
           },
           {
             "row": 10,
             "column": 1,
-            "value": "Supply D"
+            "value": ""
           },
           {
             "row": 10,
             "column": 2,
-            "value": "Supplies"
+            "value": ""
           },
           {
             "row": 10,
             "column": 3,
-            "value": "340"
+            "value": ""
           },
           {
             "row": 10,
             "column": 4,
-            "value": "22.8"
-          },
-          {
-            "row": 10,
-            "column": 5,
-            "value": "7752.0"
-          },
-          {
-            "row": 10,
-            "column": 6,
-            "value": "150"
-          },
-          {
-            "row": 10,
-            "column": 7,
-            "value": "Supplier G"
+            "value": ""
           }
         ]
       },
@@ -514,42 +349,27 @@
           {
             "row": 11,
             "column": 0,
-            "value": "ITM0012"
+            "value": "Operating Income"
           },
           {
             "row": 11,
             "column": 1,
-            "value": "Equipment E"
+            "value": "149000.0"
           },
           {
             "row": 11,
             "column": 2,
-            "value": "Equipment"
+            "value": "212500.0"
           },
           {
             "row": 11,
             "column": 3,
-            "value": "15"
+            "value": "262500.0"
           },
           {
             "row": 11,
             "column": 4,
-            "value": "1250.0"
-          },
-          {
-            "row": 11,
-            "column": 5,
-            "value": "18750.0"
-          },
-          {
-            "row": 11,
-            "column": 6,
-            "value": "10"
-          },
-          {
-            "row": 11,
-            "column": 7,
-            "value": "Supplier H"
+            "value": "23.5"
           }
         ]
       },
@@ -559,42 +379,27 @@
           {
             "row": 12,
             "column": 0,
-            "value": "ITM0013"
+            "value": "Interest Expense"
           },
           {
             "row": 12,
             "column": 1,
-            "value": "Device F"
+            "value": "5000.0"
           },
           {
             "row": 12,
             "column": 2,
-            "value": "Electronics"
+            "value": "4500.0"
           },
           {
             "row": 12,
             "column": 3,
-            "value": "78"
+            "value": "4000.0"
           },
           {
             "row": 12,
             "column": 4,
-            "value": "215.0"
-          },
-          {
-            "row": 12,
-            "column": 5,
-            "value": "16770.0"
-          },
-          {
-            "row": 12,
-            "column": 6,
-            "value": "40"
-          },
-          {
-            "row": 12,
-            "column": 7,
-            "value": "Supplier B"
+            "value": "-11.1"
           }
         ]
       },
@@ -604,42 +409,27 @@
           {
             "row": 13,
             "column": 0,
-            "value": "ITM0014"
+            "value": "Tax"
           },
           {
             "row": 13,
             "column": 1,
-            "value": "Unit G"
+            "value": "28800.0"
           },
           {
             "row": 13,
             "column": 2,
-            "value": "Parts"
+            "value": "41600.0"
           },
           {
             "row": 13,
             "column": 3,
-            "value": "290"
+            "value": "51700.0"
           },
           {
             "row": 13,
             "column": 4,
-            "value": "35.4"
-          },
-          {
-            "row": 13,
-            "column": 5,
-            "value": "10266.0"
-          },
-          {
-            "row": 13,
-            "column": 6,
-            "value": "120"
-          },
-          {
-            "row": 13,
-            "column": 7,
-            "value": "Supplier D"
+            "value": "24.3"
           }
         ]
       },
@@ -649,492 +439,27 @@
           {
             "row": 14,
             "column": 0,
-            "value": "ITM0015"
+            "value": "Net Income"
           },
           {
             "row": 14,
             "column": 1,
-            "value": "Module H"
+            "value": "115200.0"
           },
           {
             "row": 14,
             "column": 2,
-            "value": "Electronics"
+            "value": "166400.0"
           },
           {
             "row": 14,
             "column": 3,
-            "value": "165"
+            "value": "206800.0"
           },
           {
             "row": 14,
             "column": 4,
-            "value": "95.8"
-          },
-          {
-            "row": 14,
-            "column": 5,
-            "value": "15807.0"
-          },
-          {
-            "row": 14,
-            "column": 6,
-            "value": "75"
-          },
-          {
-            "row": 14,
-            "column": 7,
-            "value": "Supplier A"
-          }
-        ]
-      },
-      {
-        "row_number": 15,
-        "cells": [
-          {
-            "row": 15,
-            "column": 0,
-            "value": "ITM0016"
-          },
-          {
-            "row": 15,
-            "column": 1,
-            "value": "Assembly I"
-          },
-          {
-            "row": 15,
-            "column": 2,
-            "value": "Electronics"
-          },
-          {
-            "row": 15,
-            "column": 3,
-            "value": "88"
-          },
-          {
-            "row": 15,
-            "column": 4,
-            "value": "178.5"
-          },
-          {
-            "row": 15,
-            "column": 5,
-            "value": "15708.0"
-          },
-          {
-            "row": 15,
-            "column": 6,
-            "value": "50"
-          },
-          {
-            "row": 15,
-            "column": 7,
-            "value": "Supplier B"
-          }
-        ]
-      },
-      {
-        "row_number": 16,
-        "cells": [
-          {
-            "row": 16,
-            "column": 0,
-            "value": "ITM0017"
-          },
-          {
-            "row": 16,
-            "column": 1,
-            "value": "Kit J"
-          },
-          {
-            "row": 16,
-            "column": 2,
-            "value": "Supplies"
-          },
-          {
-            "row": 16,
-            "column": 3,
-            "value": "420"
-          },
-          {
-            "row": 16,
-            "column": 4,
-            "value": "28.9"
-          },
-          {
-            "row": 16,
-            "column": 5,
-            "value": "12138.0"
-          },
-          {
-            "row": 16,
-            "column": 6,
-            "value": "180"
-          },
-          {
-            "row": 16,
-            "column": 7,
-            "value": "Supplier G"
-          }
-        ]
-      },
-      {
-        "row_number": 17,
-        "cells": [
-          {
-            "row": 17,
-            "column": 0,
-            "value": "ITM0018"
-          },
-          {
-            "row": 17,
-            "column": 1,
-            "value": "Package K"
-          },
-          {
-            "row": 17,
-            "column": 2,
-            "value": "Raw Materials"
-          },
-          {
-            "row": 17,
-            "column": 3,
-            "value": "750"
-          },
-          {
-            "row": 17,
-            "column": 4,
-            "value": "7.65"
-          },
-          {
-            "row": 17,
-            "column": 5,
-            "value": "5737.5"
-          },
-          {
-            "row": 17,
-            "column": 6,
-            "value": "300"
-          },
-          {
-            "row": 17,
-            "column": 7,
-            "value": "Supplier F"
-          }
-        ]
-      },
-      {
-        "row_number": 18,
-        "cells": [
-          {
-            "row": 18,
-            "column": 0,
-            "value": "ITM0019"
-          },
-          {
-            "row": 18,
-            "column": 1,
-            "value": "Bundle L"
-          },
-          {
-            "row": 18,
-            "column": 2,
-            "value": "Electronics"
-          },
-          {
-            "row": 18,
-            "column": 3,
-            "value": "130"
-          },
-          {
-            "row": 18,
-            "column": 4,
-            "value": "145.0"
-          },
-          {
-            "row": 18,
-            "column": 5,
-            "value": "18850.0"
-          },
-          {
-            "row": 18,
-            "column": 6,
-            "value": "70"
-          },
-          {
-            "row": 18,
-            "column": 7,
-            "value": "Supplier A"
-          }
-        ]
-      },
-      {
-        "row_number": 19,
-        "cells": [
-          {
-            "row": 19,
-            "column": 0,
-            "value": "ITM0020"
-          },
-          {
-            "row": 19,
-            "column": 1,
-            "value": "Set M"
-          },
-          {
-            "row": 19,
-            "column": 2,
-            "value": "Tools"
-          },
-          {
-            "row": 19,
-            "column": 3,
-            "value": "67"
-          },
-          {
-            "row": 19,
-            "column": 4,
-            "value": "425.0"
-          },
-          {
-            "row": 19,
-            "column": 5,
-            "value": "28475.0"
-          },
-          {
-            "row": 19,
-            "column": 6,
-            "value": "30"
-          },
-          {
-            "row": 19,
-            "column": 7,
-            "value": "Supplier C"
-          }
-        ]
-      },
-      {
-        "row_number": 20,
-        "cells": [
-          {
-            "row": 20,
-            "column": 0,
-            "value": "ITM0021"
-          },
-          {
-            "row": 20,
-            "column": 1,
-            "value": "Product N"
-          },
-          {
-            "row": 20,
-            "column": 2,
-            "value": "Electronics"
-          },
-          {
-            "row": 20,
-            "column": 3,
-            "value": "210"
-          },
-          {
-            "row": 20,
-            "column": 4,
-            "value": "68.9"
-          },
-          {
-            "row": 20,
-            "column": 5,
-            "value": "14469.0"
-          },
-          {
-            "row": 20,
-            "column": 6,
-            "value": "100"
-          },
-          {
-            "row": 20,
-            "column": 7,
-            "value": "Supplier B"
-          }
-        ]
-      },
-      {
-        "row_number": 21,
-        "cells": [
-          {
-            "row": 21,
-            "column": 0,
-            "value": "ITM0022"
-          },
-          {
-            "row": 21,
-            "column": 1,
-            "value": "Item O"
-          },
-          {
-            "row": 21,
-            "column": 2,
-            "value": "Supplies"
-          },
-          {
-            "row": 21,
-            "column": 3,
-            "value": "385"
-          },
-          {
-            "row": 21,
-            "column": 4,
-            "value": "31.2"
-          },
-          {
-            "row": 21,
-            "column": 5,
-            "value": "12012.0"
-          },
-          {
-            "row": 21,
-            "column": 6,
-            "value": "160"
-          },
-          {
-            "row": 21,
-            "column": 7,
-            "value": "Supplier G"
-          }
-        ]
-      },
-      {
-        "row_number": 22,
-        "cells": [
-          {
-            "row": 22,
-            "column": 0,
-            "value": "ITM0023"
-          },
-          {
-            "row": 22,
-            "column": 1,
-            "value": "Good P"
-          },
-          {
-            "row": 22,
-            "column": 2,
-            "value": "Raw Materials"
-          },
-          {
-            "row": 22,
-            "column": 3,
-            "value": "640"
-          },
-          {
-            "row": 22,
-            "column": 4,
-            "value": "9.85"
-          },
-          {
-            "row": 22,
-            "column": 5,
-            "value": "6304.0"
-          },
-          {
-            "row": 22,
-            "column": 6,
-            "value": "280"
-          },
-          {
-            "row": 22,
-            "column": 7,
-            "value": "Supplier F"
-          }
-        ]
-      },
-      {
-        "row_number": 23,
-        "cells": [
-          {
-            "row": 23,
-            "column": 0,
-            "value": "ITM0024"
-          },
-          {
-            "row": 23,
-            "column": 1,
-            "value": "Article Q"
-          },
-          {
-            "row": 23,
-            "column": 2,
-            "value": "Parts"
-          },
-          {
-            "row": 23,
-            "column": 3,
-            "value": "295"
-          },
-          {
-            "row": 23,
-            "column": 4,
-            "value": "42.5"
-          },
-          {
-            "row": 23,
-            "column": 5,
-            "value": "12537.5"
-          },
-          {
-            "row": 23,
-            "column": 6,
-            "value": "130"
-          },
-          {
-            "row": 23,
-            "column": 7,
-            "value": "Supplier D"
-          }
-        ]
-      },
-      {
-        "row_number": 24,
-        "cells": [
-          {
-            "row": 24,
-            "column": 0,
-            "value": "ITM0025"
-          },
-          {
-            "row": 24,
-            "column": 1,
-            "value": "Thing R"
-          },
-          {
-            "row": 24,
-            "column": 2,
-            "value": "Equipment"
-          },
-          {
-            "row": 24,
-            "column": 3,
-            "value": "22"
-          },
-          {
-            "row": 24,
-            "column": 4,
-            "value": "980.0"
-          },
-          {
-            "row": 24,
-            "column": 5,
-            "value": "21560.0"
-          },
-          {
-            "row": 24,
-            "column": 6,
-            "value": "15"
-          },
-          {
-            "row": 24,
-            "column": 7,
-            "value": "Supplier H"
+            "value": "24.3"
           }
         ]
       }

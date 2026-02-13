@@ -223,8 +223,12 @@ async def detect_tables_complete(file: UploadFile) -> JSONResponse:
         
         return JSONResponse(content=response)
         
+    except HTTPException:
+        # Re-raise HTTP exceptions (already have proper status codes and messages)
+        raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
+        # Catch any other unexpected errors during processing
+        raise HTTPException(status_code=500, detail=f"Unexpected error during table detection: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn

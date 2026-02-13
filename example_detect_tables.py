@@ -33,10 +33,16 @@ def detect_tables_in_excel(file_path: str, api_url: str = "http://localhost:8000
     if not file_path.exists():
         raise FileNotFoundError(f"File not found: {file_path}")
     
+    # Determine MIME type based on file extension
+    if file_path.suffix.lower() == '.xls':
+        mime_type = "application/vnd.ms-excel"
+    else:  # .xlsx
+        mime_type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    
     # Upload and detect
     print(f"📤 Uploading file: {file_path}")
     with open(file_path, "rb") as f:
-        files = {"file": (file_path.name, f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
+        files = {"file": (file_path.name, f, mime_type)}
         response = requests.post(endpoint, files=files, timeout=30)
     
     # Check response
