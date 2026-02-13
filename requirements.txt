@@ -19,9 +19,12 @@ fastapi==0.126.0
 uvicorn==0.34.0
 python-multipart
 
+# UI
+streamlit>=1.28.0
+
 # Utilities
 joblib==1.5.3
 pydantic==2.12.5
 
-# Workflow Orchestration
-apache-airflow==2.10.4
+# Workflow Orchestration (patched for security)
+apache-airflow>=3.1.6
