@@ -164,6 +164,22 @@ async def detect_tables_complete(file: UploadFile) -> JSONResponse:
         # Step 4: Predict using the trained model
         predictions = model.predict(features_for_prediction)
         
+        # Step 4.5: Apply rule-based fallback if no headers detected
+        # This handles cases where the model doesn't detect headers due to class imbalance
+        header_count = sum(predictions == 1)
+        if header_count == 0:
+            # Fallback: Mark row_idx=0 cells as headers (column names are always headers)
+            # We mark all row 0 cells as headers, not just non-empty ones, because:
+            # 1. The structural_features extraction ensures headers exist
+            # 2. Empty column names are still valid headers (e.g., unnamed columns)
+            predictions = []
+            for idx, row in structural_df.iterrows():
+                if row["row_idx"] == 0:  # All cells in row 0 are headers
+                    predictions.append(1)  # Header
+                else:
+                    predictions.append(0)  # Data
+            predictions = np.array(predictions)
+        
         # Step 5: Structure the output as JSON
         # Combine predictions with cell information
         results_df = structural_df[["row_idx", "col_idx", "text"]].copy()

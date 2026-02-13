@@ -1,75 +1,111 @@
 {
   "status": "success",
-  "filename": "financial_statement.xlsx",
+  "filename": "sales_report.xlsx",
   "summary": {
-    "total_cells": 75,
-    "header_cells": 0,
-    "data_cells": 75,
+    "total_cells": 81,
+    "header_cells": 9,
+    "data_cells": 72,
     "dimensions": {
-      "rows": 15,
-      "columns": 5
+      "rows": 8,
+      "columns": 9
     }
   },
   "detected_tables": {
-    "headers": [],
-    "data": [
+    "headers": [
       {
-        "row_number": 0,
-        "cells": [
-          {
-            "row": 0,
-            "column": 0,
-            "value": "Revenue"
-          },
-          {
-            "row": 0,
-            "column": 1,
-            "value": "500000.0"
-          },
-          {
-            "row": 0,
-            "column": 2,
-            "value": "650000.0"
-          },
-          {
-            "row": 0,
-            "column": 3,
-            "value": "780000.0"
-          },
-          {
-            "row": 0,
-            "column": 4,
-            "value": "20.0"
-          }
-        ]
+        "row": 0,
+        "column": 0,
+        "value": "Product"
       },
+      {
+        "row": 0,
+        "column": 1,
+        "value": "Category"
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "value": "Q1_Sales"
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "value": "Q2_Sales"
+      },
+      {
+        "row": 0,
+        "column": 4,
+        "value": "Q3_Sales"
+      },
+      {
+        "row": 0,
+        "column": 5,
+        "value": "Q4_Sales"
+      },
+      {
+        "row": 0,
+        "column": 6,
+        "value": "Total_Sales"
+      },
+      {
+        "row": 0,
+        "column": 7,
+        "value": "Unit_Price"
+      },
+      {
+        "row": 0,
+        "column": 8,
+        "value": "Units_Sold"
+      }
+    ],
+    "data": [
       {
         "row_number": 1,
         "cells": [
           {
             "row": 1,
             "column": 0,
-            "value": "Cost of Goods Sold"
+            "value": "Laptop"
           },
           {
             "row": 1,
             "column": 1,
-            "value": "200000.0"
+            "value": "Electronics"
           },
           {
             "row": 1,
             "column": 2,
-            "value": "260000.0"
+            "value": "150000"
           },
           {
             "row": 1,
             "column": 3,
-            "value": "312000.0"
+            "value": "165000"
           },
           {
             "row": 1,
             "column": 4,
-            "value": "20.0"
+            "value": "180000"
+          },
+          {
+            "row": 1,
+            "column": 5,
+            "value": "195000"
+          },
+          {
+            "row": 1,
+            "column": 6,
+            "value": "690000"
+          },
+          {
+            "row": 1,
+            "column": 7,
+            "value": "1200"
+          },
+          {
+            "row": 1,
+            "column": 8,
+            "value": "575"
           }
         ]
       },
@@ -79,27 +115,47 @@
           {
             "row": 2,
             "column": 0,
-            "value": "Gross Profit"
+            "value": "Mouse"
           },
           {
             "row": 2,
             "column": 1,
-            "value": "300000.0"
+            "value": "Accessories"
           },
           {
             "row": 2,
             "column": 2,
-            "value": "390000.0"
+            "value": "12000"
           },
           {
             "row": 2,
             "column": 3,
-            "value": "468000.0"
+            "value": "13500"
           },
           {
             "row": 2,
             "column": 4,
-            "value": "20.0"
+            "value": "14000"
+          },
+          {
+            "row": 2,
+            "column": 5,
+            "value": "15000"
+          },
+          {
+            "row": 2,
+            "column": 6,
+            "value": "54500"
+          },
+          {
+            "row": 2,
+            "column": 7,
+            "value": "25"
+          },
+          {
+            "row": 2,
+            "column": 8,
+            "value": "2180"
           }
         ]
       },
@@ -109,27 +165,47 @@
           {
             "row": 3,
             "column": 0,
-            "value": ""
+            "value": "Keyboard"
           },
           {
             "row": 3,
             "column": 1,
-            "value": ""
+            "value": "Accessories"
           },
           {
             "row": 3,
             "column": 2,
-            "value": ""
+            "value": "8500"
           },
           {
             "row": 3,
             "column": 3,
-            "value": ""
+            "value": "9200"
           },
           {
             "row": 3,
             "column": 4,
-            "value": ""
+            "value": "9800"
+          },
+          {
+            "row": 3,
+            "column": 5,
+            "value": "10500"
+          },
+          {
+            "row": 3,
+            "column": 6,
+            "value": "38000"
+          },
+          {
+            "row": 3,
+            "column": 7,
+            "value": "45"
+          },
+          {
+            "row": 3,
+            "column": 8,
+            "value": "844"
           }
         ]
       },
@@ -139,27 +215,47 @@
           {
             "row": 4,
             "column": 0,
-            "value": "Operating Expenses"
+            "value": "Monitor"
           },
           {
             "row": 4,
             "column": 1,
-            "value": ""
+            "value": "Electronics"
           },
           {
             "row": 4,
             "column": 2,
-            "value": ""
+            "value": "45000"
           },
           {
             "row": 4,
             "column": 3,
-            "value": ""
+            "value": "48000"
           },
           {
             "row": 4,
             "column": 4,
-            "value": ""
+            "value": "52000"
+          },
+          {
+            "row": 4,
+            "column": 5,
+            "value": "55000"
+          },
+          {
+            "row": 4,
+            "column": 6,
+            "value": "200000"
+          },
+          {
+            "row": 4,
+            "column": 7,
+            "value": "350"
+          },
+          {
+            "row": 4,
+            "column": 8,
+            "value": "571"
           }
         ]
       },
@@ -169,27 +265,47 @@
           {
             "row": 5,
             "column": 0,
-            "value": "Salaries"
+            "value": "Headphones"
           },
           {
             "row": 5,
             "column": 1,
-            "value": "80000.0"
+            "value": "Accessories"
           },
           {
             "row": 5,
             "column": 2,
-            "value": "95000.0"
+            "value": "15000"
           },
           {
             "row": 5,
             "column": 3,
-            "value": "110000.0"
+            "value": "16500"
           },
           {
             "row": 5,
             "column": 4,
-            "value": "15.8"
+            "value": "18000"
+          },
+          {
+            "row": 5,
+            "column": 5,
+            "value": "19500"
+          },
+          {
+            "row": 5,
+            "column": 6,
+            "value": "69000"
+          },
+          {
+            "row": 5,
+            "column": 7,
+            "value": "85"
+          },
+          {
+            "row": 5,
+            "column": 8,
+            "value": "812"
           }
         ]
       },
@@ -199,27 +315,47 @@
           {
             "row": 6,
             "column": 0,
-            "value": "Rent"
+            "value": "Webcam"
           },
           {
             "row": 6,
             "column": 1,
-            "value": "24000.0"
+            "value": "Electronics"
           },
           {
             "row": 6,
             "column": 2,
-            "value": "24000.0"
+            "value": "18000"
           },
           {
             "row": 6,
             "column": 3,
-            "value": "26000.0"
+            "value": "19500"
           },
           {
             "row": 6,
             "column": 4,
-            "value": "8.3"
+            "value": "21000"
+          },
+          {
+            "row": 6,
+            "column": 5,
+            "value": "22500"
+          },
+          {
+            "row": 6,
+            "column": 6,
+            "value": "81000"
+          },
+          {
+            "row": 6,
+            "column": 7,
+            "value": "120"
+          },
+          {
+            "row": 6,
+            "column": 8,
+            "value": "675"
           }
         ]
       },
@@ -229,27 +365,47 @@
           {
             "row": 7,
             "column": 0,
-            "value": "Utilities"
+            "value": "USB Drive"
           },
           {
             "row": 7,
             "column": 1,
-            "value": "12000.0"
+            "value": "Storage"
           },
           {
             "row": 7,
             "column": 2,
-            "value": "13500.0"
+            "value": "5000"
           },
           {
             "row": 7,
             "column": 3,
-            "value": "14500.0"
+            "value": "5500"
           },
           {
             "row": 7,
             "column": 4,
-            "value": "7.4"
+            "value": "6000"
+          },
+          {
+            "row": 7,
+            "column": 5,
+            "value": "6500"
+          },
+          {
+            "row": 7,
+            "column": 6,
+            "value": "23000"
+          },
+          {
+            "row": 7,
+            "column": 7,
+            "value": "15"
+          },
+          {
+            "row": 7,
+            "column": 8,
+            "value": "1533"
           }
         ]
       },
@@ -259,207 +415,47 @@
           {
             "row": 8,
             "column": 0,
-            "value": "Marketing"
+            "value": "Speaker"
           },
           {
             "row": 8,
             "column": 1,
-            "value": "35000.0"
+            "value": "Audio"
           },
           {
             "row": 8,
             "column": 2,
-            "value": "45000.0"
+            "value": "12000"
           },
           {
             "row": 8,
             "column": 3,
-            "value": "55000.0"
+            "value": "13000"
           },
           {
             "row": 8,
             "column": 4,
-            "value": "22.2"
-          }
-        ]
-      },
-      {
-        "row_number": 9,
-        "cells": [
-          {
-            "row": 9,
-            "column": 0,
-            "value": "Total Operating Expenses"
+            "value": "14500"
           },
           {
-            "row": 9,
-            "column": 1,
-            "value": "151000.0"
+            "row": 8,
+            "column": 5,
+            "value": "15500"
           },
           {
-            "row": 9,
-            "column": 2,
-            "value": "177500.0"
+            "row": 8,
+            "column": 6,
+            "value": "55000"
           },
           {
-            "row": 9,
-            "column": 3,
-            "value": "205500.0"
+            "row": 8,
+            "column": 7,
+            "value": "95"
           },
           {
-            "row": 9,
-            "column": 4,
-            "value": "15.8"
-          }
-        ]
-      },
-      {
-        "row_number": 10,
-        "cells": [
-          {
-            "row": 10,
-            "column": 0,
-            "value": ""
-          },
-          {
-            "row": 10,
-            "column": 1,
-            "value": ""
-          },
-          {
-            "row": 10,
-            "column": 2,
-            "value": ""
-          },
-          {
-            "row": 10,
-            "column": 3,
-            "value": ""
-          },
-          {
-            "row": 10,
-            "column": 4,
-            "value": ""
-          }
-        ]
-      },
-      {
-        "row_number": 11,
-        "cells": [
-          {
-            "row": 11,
-            "column": 0,
-            "value": "Operating Income"
-          },
-          {
-            "row": 11,
-            "column": 1,
-            "value": "149000.0"
-          },
-          {
-            "row": 11,
-            "column": 2,
-            "value": "212500.0"
-          },
-          {
-            "row": 11,
-            "column": 3,
-            "value": "262500.0"
-          },
-          {
-            "row": 11,
-            "column": 4,
-            "value": "23.5"
-          }
-        ]
-      },
-      {
-        "row_number": 12,
-        "cells": [
-          {
-            "row": 12,
-            "column": 0,
-            "value": "Interest Expense"
-          },
-          {
-            "row": 12,
-            "column": 1,
-            "value": "5000.0"
-          },
-          {
-            "row": 12,
-            "column": 2,
-            "value": "4500.0"
-          },
-          {
-            "row": 12,
-            "column": 3,
-            "value": "4000.0"
-          },
-          {
-            "row": 12,
-            "column": 4,
-            "value": "-11.1"
-          }
-        ]
-      },
-      {
-        "row_number": 13,
-        "cells": [
-          {
-            "row": 13,
-            "column": 0,
-            "value": "Tax"
-          },
-          {
-            "row": 13,
-            "column": 1,
-            "value": "28800.0"
-          },
-          {
-            "row": 13,
-            "column": 2,
-            "value": "41600.0"
-          },
-          {
-            "row": 13,
-            "column": 3,
-            "value": "51700.0"
-          },
-          {
-            "row": 13,
-            "column": 4,
-            "value": "24.3"
-          }
-        ]
-      },
-      {
-        "row_number": 14,
-        "cells": [
-          {
-            "row": 14,
-            "column": 0,
-            "value": "Net Income"
-          },
-          {
-            "row": 14,
-            "column": 1,
-            "value": "115200.0"
-          },
-          {
-            "row": 14,
-            "column": 2,
-            "value": "166400.0"
-          },
-          {
-            "row": 14,
-            "column": 3,
-            "value": "206800.0"
-          },
-          {
-            "row": 14,
-            "column": 4,
-            "value": "24.3"
+            "row": 8,
+            "column": 8,
+            "value": "579"
           }
         ]
       }
