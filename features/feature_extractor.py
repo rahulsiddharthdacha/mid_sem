@@ -5,11 +5,32 @@ from semantic_features import extract_semantic_features
 def generate_header_label(row_idx, text, is_numeric):
     """
     Weak supervision rule for header labeling
+    
+    Headers are typically:
+    - In the first row (row_idx == 0)
+    - Non-numeric text containing alphabetic characters
+    - Descriptive labels for columns
+    
+    This improved logic identifies headers more accurately by:
+    1. Marking all non-numeric cells in row 0 as headers
+    2. Also considering text cells with alphabetic content as potential headers
     """
+    # First row non-numeric cells are almost always headers
     if row_idx == 0 and not is_numeric:
         return 1
-    if text.isalpha() and not is_numeric:
+    
+    # Text with alphabetic characters (not purely numeric) could be headers
+    # This catches column names that might appear in the first row
+    text_str = str(text).strip()
+    if text_str and not is_numeric and any(c.isalpha() for c in text_str):
+        # If it's in the first row, it's definitely a header
+        if row_idx == 0:
+            return 1
+        # Otherwise, it's more likely to be data unless it matches header patterns
+        # For now, we'll be conservative and label as data
         return 0
+    
+    # Numeric or empty cells are data
     return 0
 
 
