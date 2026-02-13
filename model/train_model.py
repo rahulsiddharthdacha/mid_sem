@@ -1,6 +1,7 @@
 import mlflow
 import mlflow.sklearn
 import pandas as pd
+import os
 
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, f1_score
@@ -10,6 +11,8 @@ from sklearn.svm import SVC
 
 # from features.feature_extractor import extract_features
 
+# Set MLflow tracking URI to use local mlruns directory
+mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI", "./mlruns"))
 
 df = pd.read_csv("./features/features.csv")
 
