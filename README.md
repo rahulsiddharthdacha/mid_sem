@@ -64,6 +64,37 @@ mid_sem/
 
 ## Usage
 
+### Quick Example - Complete Table Detection Cycle
+
+Here's how to use the API for the complete cycle (upload → detect → JSON output):
+
+1. **Start the API server:**
+   ```bash
+   uvicorn serving.app:app --host 0.0.0.0 --port 8000
+   ```
+
+2. **Upload an Excel file and detect tables:**
+   ```bash
+   curl -X POST "http://localhost:8000/detect-tables" \
+     -F "file=@data/sales_report.xlsx" | python -m json.tool
+   ```
+
+3. **View the structured JSON output:**
+   - `summary`: Overall statistics (total cells, headers, data cells, dimensions)
+   - `detected_tables.headers`: List of detected header cells with locations
+   - `detected_tables.data`: Data rows organized by row number
+
+**Or use the Python example script:**
+```bash
+python example_detect_tables.py data/sales_report.xlsx
+```
+
+The system will automatically:
+- Extract structural features (cell position, density, content type)
+- Extract semantic features (text embeddings)
+- Use the trained ML model to classify cells as headers or data
+- Return structured JSON with detected table components
+
 ### Quick Start - Launch All Services
 
 The easiest way to get started is to launch all services at once:
@@ -153,11 +184,99 @@ The API will be available at `http://localhost:8000`.
 
 #### API Endpoints
 
-- **POST /predict**: Upload an Excel file to detect table cells
-  - Request: Excel file upload
-  - Response: JSON with predicted table cell locations
+##### GET /
+Root endpoint with API information and available endpoints.
 
-Example usage:
+##### GET /health
+Health check endpoint to verify server and model status.
+
+```bash
+curl http://localhost:8000/health
+```
+
+##### POST /detect-tables (Recommended)
+**Complete Table Detection Endpoint** - Upload an Excel file and get structured JSON output with detected table headers and data.
+
+This endpoint performs the complete cycle:
+1. Upload Excel file
+2. Extract structural and semantic features
+3. Use trained ML model to detect table cells
+4. Return structured JSON with detected tables
+
+**Request:**
+- Method: POST
+- Content-Type: multipart/form-data
+- File parameter: `file` (Excel file: .xlsx or .xls)
+
+**Response:**
+```json
+{
+  "status": "success",
+  "filename": "sales_report.xlsx",
+  "summary": {
+    "total_cells": 72,
+    "header_cells": 9,
+    "data_cells": 63,
+    "dimensions": {
+      "rows": 8,
+      "columns": 9
+    }
+  },
+  "detected_tables": {
+    "headers": [
+      {
+        "row": 0,
+        "column": 0,
+        "value": "Product"
+      },
+      ...
+    ],
+    "data": [
+      {
+        "row_number": 1,
+        "cells": [
+          {
+            "row": 1,
+            "column": 0,
+            "value": "Laptop"
+          },
+          ...
+        ]
+      },
+      ...
+    ]
+  }
+}
+```
+
+**Example usage:**
+```bash
+curl -X POST "http://localhost:8000/detect-tables" \
+  -H "Content-Type: multipart/form-data" \
+  -F "file=@data/sales_report.xlsx"
+```
+
+**Python example:**
+```python
+import requests
+
+url = "http://localhost:8000/detect-tables"
+files = {"file": open("data/sales_report.xlsx", "rb")}
+response = requests.post(url, files=files)
+result = response.json()
+
+print(f"Detected {result['summary']['header_cells']} headers")
+print(f"Detected {result['summary']['data_cells']} data cells")
+```
+
+##### POST /predict (Legacy)
+Simple prediction endpoint that returns raw prediction array.
+
+**Request:** Excel file upload
+
+**Response:** JSON with predicted table cell locations
+
+**Example usage:**
 ```bash
 curl -X POST "http://localhost:8000/predict" \
   -H "Content-Type: multipart/form-data" \

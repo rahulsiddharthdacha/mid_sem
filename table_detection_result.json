@@ -1,0 +1,464 @@
+{
+  "status": "success",
+  "filename": "financial_statement.xlsx",
+  "summary": {
+    "total_cells": 75,
+    "header_cells": 5,
+    "data_cells": 70,
+    "dimensions": {
+      "rows": 15,
+      "columns": 5
+    }
+  },
+  "detected_tables": {
+    "headers": [
+      {
+        "row": 0,
+        "column": 0,
+        "value": "Revenue"
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "value": "500000.0"
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "value": "650000.0"
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "value": "780000.0"
+      },
+      {
+        "row": 0,
+        "column": 4,
+        "value": "20.0"
+      }
+    ],
+    "data": [
+      {
+        "row_number": 1,
+        "cells": [
+          {
+            "row": 1,
+            "column": 0,
+            "value": "Cost of Goods Sold"
+          },
+          {
+            "row": 1,
+            "column": 1,
+            "value": "200000.0"
+          },
+          {
+            "row": 1,
+            "column": 2,
+            "value": "260000.0"
+          },
+          {
+            "row": 1,
+            "column": 3,
+            "value": "312000.0"
+          },
+          {
+            "row": 1,
+            "column": 4,
+            "value": "20.0"
+          }
+        ]
+      },
+      {
+        "row_number": 2,
+        "cells": [
+          {
+            "row": 2,
+            "column": 0,
+            "value": "Gross Profit"
+          },
+          {
+            "row": 2,
+            "column": 1,
+            "value": "300000.0"
+          },
+          {
+            "row": 2,
+            "column": 2,
+            "value": "390000.0"
+          },
+          {
+            "row": 2,
+            "column": 3,
+            "value": "468000.0"
+          },
+          {
+            "row": 2,
+            "column": 4,
+            "value": "20.0"
+          }
+        ]
+      },
+      {
+        "row_number": 3,
+        "cells": [
+          {
+            "row": 3,
+            "column": 0,
+            "value": ""
+          },
+          {
+            "row": 3,
+            "column": 1,
+            "value": ""
+          },
+          {
+            "row": 3,
+            "column": 2,
+            "value": ""
+          },
+          {
+            "row": 3,
+            "column": 3,
+            "value": ""
+          },
+          {
+            "row": 3,
+            "column": 4,
+            "value": ""
+          }
+        ]
+      },
+      {
+        "row_number": 4,
+        "cells": [
+          {
+            "row": 4,
+            "column": 0,
+            "value": "Operating Expenses"
+          },
+          {
+            "row": 4,
+            "column": 1,
+            "value": ""
+          },
+          {
+            "row": 4,
+            "column": 2,
+            "value": ""
+          },
+          {
+            "row": 4,
+            "column": 3,
+            "value": ""
+          },
+          {
+            "row": 4,
+            "column": 4,
+            "value": ""
+          }
+        ]
+      },
+      {
+        "row_number": 5,
+        "cells": [
+          {
+            "row": 5,
+            "column": 0,
+            "value": "Salaries"
+          },
+          {
+            "row": 5,
+            "column": 1,
+            "value": "80000.0"
+          },
+          {
+            "row": 5,
+            "column": 2,
+            "value": "95000.0"
+          },
+          {
+            "row": 5,
+            "column": 3,
+            "value": "110000.0"
+          },
+          {
+            "row": 5,
+            "column": 4,
+            "value": "15.8"
+          }
+        ]
+      },
+      {
+        "row_number": 6,
+        "cells": [
+          {
+            "row": 6,
+            "column": 0,
+            "value": "Rent"
+          },
+          {
+            "row": 6,
+            "column": 1,
+            "value": "24000.0"
+          },
+          {
+            "row": 6,
+            "column": 2,
+            "value": "24000.0"
+          },
+          {
+            "row": 6,
+            "column": 3,
+            "value": "26000.0"
+          },
+          {
+            "row": 6,
+            "column": 4,
+            "value": "8.3"
+          }
+        ]
+      },
+      {
+        "row_number": 7,
+        "cells": [
+          {
+            "row": 7,
+            "column": 0,
+            "value": "Utilities"
+          },
+          {
+            "row": 7,
+            "column": 1,
+            "value": "12000.0"
+          },
+          {
+            "row": 7,
+            "column": 2,
+            "value": "13500.0"
+          },
+          {
+            "row": 7,
+            "column": 3,
+            "value": "14500.0"
+          },
+          {
+            "row": 7,
+            "column": 4,
+            "value": "7.4"
+          }
+        ]
+      },
+      {
+        "row_number": 8,
+        "cells": [
+          {
+            "row": 8,
+            "column": 0,
+            "value": "Marketing"
+          },
+          {
+            "row": 8,
+            "column": 1,
+            "value": "35000.0"
+          },
+          {
+            "row": 8,
+            "column": 2,
+            "value": "45000.0"
+          },
+          {
+            "row": 8,
+            "column": 3,
+            "value": "55000.0"
+          },
+          {
+            "row": 8,
+            "column": 4,
+            "value": "22.2"
+          }
+        ]
+      },
+      {
+        "row_number": 9,
+        "cells": [
+          {
+            "row": 9,
+            "column": 0,
+            "value": "Total Operating Expenses"
+          },
+          {
+            "row": 9,
+            "column": 1,
+            "value": "151000.0"
+          },
+          {
+            "row": 9,
+            "column": 2,
+            "value": "177500.0"
+          },
+          {
+            "row": 9,
+            "column": 3,
+            "value": "205500.0"
+          },
+          {
+            "row": 9,
+            "column": 4,
+            "value": "15.8"
+          }
+        ]
+      },
+      {
+        "row_number": 10,
+        "cells": [
+          {
+            "row": 10,
+            "column": 0,
+            "value": ""
+          },
+          {
+            "row": 10,
+            "column": 1,
+            "value": ""
+          },
+          {
+            "row": 10,
+            "column": 2,
+            "value": ""
+          },
+          {
+            "row": 10,
+            "column": 3,
+            "value": ""
+          },
+          {
+            "row": 10,
+            "column": 4,
+            "value": ""
+          }
+        ]
+      },
+      {
+        "row_number": 11,
+        "cells": [
+          {
+            "row": 11,
+            "column": 0,
+            "value": "Operating Income"
+          },
+          {
+            "row": 11,
+            "column": 1,
+            "value": "149000.0"
+          },
+          {
+            "row": 11,
+            "column": 2,
+            "value": "212500.0"
+          },
+          {
+            "row": 11,
+            "column": 3,
+            "value": "262500.0"
+          },
+          {
+            "row": 11,
+            "column": 4,
+            "value": "23.5"
+          }
+        ]
+      },
+      {
+        "row_number": 12,
+        "cells": [
+          {
+            "row": 12,
+            "column": 0,
+            "value": "Interest Expense"
+          },
+          {
+            "row": 12,
+            "column": 1,
+            "value": "5000.0"
+          },
+          {
+            "row": 12,
+            "column": 2,
+            "value": "4500.0"
+          },
+          {
+            "row": 12,
+            "column": 3,
+            "value": "4000.0"
+          },
+          {
+            "row": 12,
+            "column": 4,
+            "value": "-11.1"
+          }
+        ]
+      },
+      {
+        "row_number": 13,
+        "cells": [
+          {
+            "row": 13,
+            "column": 0,
+            "value": "Tax"
+          },
+          {
+            "row": 13,
+            "column": 1,
+            "value": "28800.0"
+          },
+          {
+            "row": 13,
+            "column": 2,
+            "value": "41600.0"
+          },
+          {
+            "row": 13,
+            "column": 3,
+            "value": "51700.0"
+          },
+          {
+            "row": 13,
+            "column": 4,
+            "value": "24.3"
+          }
+        ]
+      },
+      {
+        "row_number": 14,
+        "cells": [
+          {
+            "row": 14,
+            "column": 0,
+            "value": "Net Income"
+          },
+          {
+            "row": 14,
+            "column": 1,
+            "value": "115200.0"
+          },
+          {
+            "row": 14,
+            "column": 2,
+            "value": "166400.0"
+          },
+          {
+            "row": 14,
+            "column": 3,
+            "value": "206800.0"
+          },
+          {
+            "row": 14,
+            "column": 4,
+            "value": "24.3"
+          }
+        ]
+      }
+    ]
+  }
+}
