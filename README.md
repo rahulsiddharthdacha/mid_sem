@@ -1,72 +1,182 @@
-# Insurance Premium Prediction System
+# ML-Based Detection of Financial Tables in Excel Using Metadata Features
 
 ## Overview
-The Insurance Premium Prediction System is designed to estimate the premium rates for insurance policies based on various features of the customer and policy. This system uses advanced machine learning algorithms to analyze data and predict insurance premiums accurately.
+This project implements a machine learning system for automatically detecting and identifying financial tables in Excel spreadsheets using metadata and structural features. The system analyzes Excel files to identify table regions, headers, and data cells using both structural and semantic features.
 
 ## Features
-- Predicts insurance premium rates based on customer and policy features.
-- User-friendly interface for input data.
-- API endpoints for integration with other applications.
-- Configurable model parameters to customize predictions.
+- **Structural Feature Extraction**: Analyzes cell positions, density, formatting, and layout patterns
+- **Semantic Feature Extraction**: Uses sentence transformers to understand cell content semantics
+- **ML-Based Table Detection**: Trains classification models to identify table components
+- **Automated Pipeline**: End-to-end pipeline for feature extraction, model training, and prediction
+- **REST API**: FastAPI-based service for table detection in uploaded Excel files
 
 ## Project Structure
 ```
 mid_sem/
-├── api/                # Contains API endpoints
-├── models/             # Machine learning models and training scripts
-├── config/             # Configuration files
-├── tests/              # Test cases for the application
-├── requirements.txt    # Project dependencies
-└── main.py             # Entry point for the application
+├── airflow/              # Airflow DAG for pipeline orchestration
+│   └── excel_pipline_dag.py
+├── data/                 # Sample Excel files
+│   └── sample.xlsx
+├── features/             # Feature extraction modules
+│   ├── feature_extractor.py      # Main feature extraction orchestrator
+│   ├── structural_features.py    # Structural metadata extraction
+│   ├── semantic_features.py      # Semantic embeddings
+│   └── features.csv              # Extracted features (generated)
+├── ingestion/            # Data ingestion and parsing
+│   └── excel_parser.py
+├── model/                # Model training scripts
+│   └── train_model.py
+├── serving/              # Model serving API
+│   └── app.py
+├── run_pipline.py        # Main pipeline execution script
+└── requirements.txt      # Project dependencies
 ```
 
-## Installation Instructions
+## Installation
+
 1. Clone the repository:
    ```bash
    git clone https://github.com/rahulsiddharthdacha/mid_sem.git
    cd mid_sem
-   ```  
-2. Create a virtual environment:
+   ```
+
+2. Create and activate a virtual environment:
    ```bash
-   python -m venv env
-   source env/bin/activate  # On Windows use `env\Scripts\activate`
-   ```  
-3. Install the dependencies:
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-## Usage Guide
-1. Start the application:
-   ```bash
-   python main.py
-   ```
-2. Access the application in your web browser at `http://localhost:5000`.
+## Usage
 
-## API Endpoints
-- `POST /predict`
-  - Description: Predicts insurance premium.
-  - Request Body: 
-    ```json
-    {
-      "age": 30,
-      "driving_experience": 10,
-      "vehicle_value": 20000,
-      ...
-    }
-    ```
-- `GET /status`
-  - Description: Returns the status of the API.
+### Running the Complete Pipeline
 
-## Configuration
-The project configuration is managed through files in the `config/` directory. You can adjust settings such as API keys, model parameters, and database configurations.
+Execute the end-to-end pipeline for feature extraction and model training:
+
+```bash
+python run_pipline.py
+```
+
+This will:
+1. Extract structural and semantic features from Excel files
+2. Train and compare multiple ML models
+3. Log experiments to MLflow
+
+### Feature Extraction
+
+Extract features from a specific Excel file:
+
+```bash
+python features/feature_extractor.py
+```
+
+The extracted features will be saved to `features/features.csv`.
+
+### Model Training
+
+Train table detection models:
+
+```bash
+python model/train_model.py
+```
+
+Models are trained using:
+- Logistic Regression
+- Random Forest Classifier
+- Gradient Boosting Classifier
+- Support Vector Machine (SVM)
+
+Results are logged to MLflow for comparison.
+
+### API Serving
+
+Start the FastAPI server for table detection:
+
+```bash
+uvicorn serving.app:app --host 0.0.0.0 --port 8000
+```
+
+The API will be available at `http://localhost:8000`.
+
+#### API Endpoints
+
+- **POST /predict**: Upload an Excel file to detect table cells
+  - Request: Excel file upload
+  - Response: JSON with predicted table cell locations
+
+Example usage:
+```bash
+curl -X POST "http://localhost:8000/predict" \
+  -H "Content-Type: multipart/form-data" \
+  -F "file=@your_file.xlsx"
+```
+
+### Viewing Experiments
+
+View MLflow experiment tracking:
+
+```bash
+mlflow ui
+```
+
+Then navigate to `http://localhost:5000` in your browser.
+
+## Features Description
+
+### Structural Features
+- **Cell Position**: Row and column indices
+- **Empty/Numeric Indicators**: Binary flags for cell content type
+- **Density Metrics**: Row and column fill ratios
+- **Cell Text**: Raw cell content
+
+### Semantic Features
+- **Sentence Embeddings**: 384-dimensional vectors from `all-MiniLM-L6-v2` model
+- **Context Understanding**: Captures semantic meaning of cell text
+- **Zero Embeddings**: For empty or numeric-only cells
+
+## Model Performance
+
+Models are evaluated using:
+- Accuracy
+- F1 Score
+- Cross-validation metrics
+
+Results are logged and can be compared in MLflow UI.
+
+## Technology Stack
+
+- **Python 3.8+**
+- **pandas & openpyxl**: Excel file processing
+- **scikit-learn**: Machine learning models
+- **sentence-transformers**: Semantic feature extraction
+- **FastAPI**: REST API serving
+- **MLflow**: Experiment tracking
+- **Airflow**: Pipeline orchestration
 
 ## Best Practices
-- Regularly update your dependencies.
-- Validate inputs to the API to prevent errors.
-- Create tests to ensure your predictions are accurate and reliable.
-- Document any changes to the API endpoints and usage guidelines.
+
+- Keep Excel files in the `data/` directory
+- Review extracted features before training
+- Compare multiple models using MLflow
+- Use the API for production deployments
+- Monitor model performance on new data
+
+## Contributing
+
+Contributions are welcome! Please follow these guidelines:
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+## License
+
+This project is for educational purposes.
 
 ---
 
-This README provides all necessary information to understand and utilize the Insurance Premium Prediction System effectively.
+For questions or issues, please open an issue on GitHub.
