@@ -64,11 +64,38 @@ mid_sem/
 
 ## Usage
 
+### Prerequisites - First Time Setup
+
+Before using the table detection API, you need to:
+
+1. **Generate training features** (if not already present):
+   ```bash
+   python features/feature_extractor.py
+   ```
+   This extracts features from `data/sample.xlsx` and saves them to `features/features.csv`.
+
+2. **Train the models** (if models don't exist):
+   ```bash
+   python model/train_model.py
+   ```
+   This trains multiple ML models and saves them to the `mlruns/` directory.
+
+**Note:** Pre-trained models are already included in the repository, so you can skip steps 1-2 unless you want to retrain with different data.
+
+3. **Start the API server** (required):
+   ```bash
+   uvicorn serving.app:app --host 0.0.0.0 --port 8000
+   ```
+   The server will automatically:
+   - Load the best pre-trained model
+   - Enable the `/detect-tables` endpoint
+   - Use rule-based fallback if needed for robust header detection
+
 ### Quick Example - Complete Table Detection Cycle
 
 Here's how to use the API for the complete cycle (upload → detect → JSON output):
 
-1. **Start the API server:**
+1. **Start the API server** (if not already running):
    ```bash
    uvicorn serving.app:app --host 0.0.0.0 --port 8000
    ```
@@ -339,6 +366,56 @@ Results are logged and can be compared in MLflow UI.
 - **FastAPI**: REST API serving
 - **MLflow**: Experiment tracking
 - **Airflow**: Pipeline orchestration
+
+## Troubleshooting
+
+### Header Detection Not Working
+
+**Problem**: "It's not able to detect headers at all"
+
+**Solution**: Make sure you've completed the following steps:
+
+1. **Check if the API server is running:**
+   ```bash
+   curl http://localhost:8000/health
+   ```
+   Expected output: `{"status":"healthy","model_loaded":true}`
+
+2. **If model_loaded is false**, train the models:
+   ```bash
+   python features/feature_extractor.py
+   python model/train_model.py
+   ```
+
+3. **Restart the API server:**
+   ```bash
+   # Stop the server (Ctrl+C if running in foreground)
+   # Or kill the process if running in background
+   
+   # Start fresh
+   uvicorn serving.app:app --host 0.0.0.0 --port 8000
+   ```
+
+4. **Test header detection:**
+   ```bash
+   python example_detect_tables.py data/sales_report.xlsx
+   ```
+
+**Note**: The system now includes a rule-based fallback that automatically detects headers in row 0 if the ML model fails. This ensures robust header detection even with class-imbalanced training data.
+
+### Model Not Found
+
+If you see "No pre-trained model found", run:
+```bash
+python model/train_model.py
+```
+
+### Missing Dependencies
+
+If you encounter import errors, install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
 ## Best Practices
 
