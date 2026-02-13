@@ -168,10 +168,13 @@ async def detect_tables_complete(file: UploadFile) -> JSONResponse:
         # This handles cases where the model doesn't detect headers due to class imbalance
         header_count = sum(predictions == 1)
         if header_count == 0:
-            # Fallback: Mark row_idx=0 cells as headers (column names are typically headers)
+            # Fallback: Mark row_idx=0 cells as headers (column names are always headers)
+            # We mark all row 0 cells as headers, not just non-empty ones, because:
+            # 1. The structural_features extraction ensures headers exist
+            # 2. Empty column names are still valid headers (e.g., unnamed columns)
             predictions = []
             for idx, row in structural_df.iterrows():
-                if row["row_idx"] == 0 and str(row["text"]).strip():  # Row 0 with non-empty text
+                if row["row_idx"] == 0:  # All cells in row 0 are headers
                     predictions.append(1)  # Header
                 else:
                     predictions.append(0)  # Data

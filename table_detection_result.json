@@ -1,13 +1,13 @@
 {
   "status": "success",
-  "filename": "inventory_report.xlsx",
+  "filename": "sales_report.xlsx",
   "summary": {
-    "total_cells": 208,
-    "header_cells": 8,
-    "data_cells": 200,
+    "total_cells": 81,
+    "header_cells": 9,
+    "data_cells": 72,
     "dimensions": {
-      "rows": 25,
-      "columns": 8
+      "rows": 8,
+      "columns": 9
     }
   },
   "detected_tables": {
@@ -15,42 +15,47 @@
       {
         "row": 0,
         "column": 0,
-        "value": "Item_ID"
+        "value": "Product"
       },
       {
         "row": 0,
         "column": 1,
-        "value": "Item_Name"
-      },
-      {
-        "row": 0,
-        "column": 2,
         "value": "Category"
       },
       {
         "row": 0,
+        "column": 2,
+        "value": "Q1_Sales"
+      },
+      {
+        "row": 0,
         "column": 3,
-        "value": "In_Stock"
+        "value": "Q2_Sales"
       },
       {
         "row": 0,
         "column": 4,
-        "value": "Unit_Cost"
+        "value": "Q3_Sales"
       },
       {
         "row": 0,
         "column": 5,
-        "value": "Total_Value"
+        "value": "Q4_Sales"
       },
       {
         "row": 0,
         "column": 6,
-        "value": "Reorder_Point"
+        "value": "Total_Sales"
       },
       {
         "row": 0,
         "column": 7,
-        "value": "Supplier"
+        "value": "Unit_Price"
+      },
+      {
+        "row": 0,
+        "column": 8,
+        "value": "Units_Sold"
       }
     ],
     "data": [
@@ -60,42 +65,47 @@
           {
             "row": 1,
             "column": 0,
-            "value": "ITM0001"
+            "value": "Laptop"
           },
           {
             "row": 1,
             "column": 1,
-            "value": "Widget A"
-          },
-          {
-            "row": 1,
-            "column": 2,
             "value": "Electronics"
           },
           {
             "row": 1,
+            "column": 2,
+            "value": "150000"
+          },
+          {
+            "row": 1,
             "column": 3,
-            "value": "250"
+            "value": "165000"
           },
           {
             "row": 1,
             "column": 4,
-            "value": "45.5"
+            "value": "180000"
           },
           {
             "row": 1,
             "column": 5,
-            "value": "11375.0"
+            "value": "195000"
           },
           {
             "row": 1,
             "column": 6,
-            "value": "100"
+            "value": "690000"
           },
           {
             "row": 1,
             "column": 7,
-            "value": "Supplier A"
+            "value": "1200"
+          },
+          {
+            "row": 1,
+            "column": 8,
+            "value": "575"
           }
         ]
       },
@@ -105,42 +115,47 @@
           {
             "row": 2,
             "column": 0,
-            "value": "ITM0002"
+            "value": "Mouse"
           },
           {
             "row": 2,
             "column": 1,
-            "value": "Widget B"
+            "value": "Accessories"
           },
           {
             "row": 2,
             "column": 2,
-            "value": "Electronics"
+            "value": "12000"
           },
           {
             "row": 2,
             "column": 3,
-            "value": "180"
+            "value": "13500"
           },
           {
             "row": 2,
             "column": 4,
-            "value": "38.75"
+            "value": "14000"
           },
           {
             "row": 2,
             "column": 5,
-            "value": "6975.0"
+            "value": "15000"
           },
           {
             "row": 2,
             "column": 6,
-            "value": "80"
+            "value": "54500"
           },
           {
             "row": 2,
             "column": 7,
-            "value": "Supplier A"
+            "value": "25"
+          },
+          {
+            "row": 2,
+            "column": 8,
+            "value": "2180"
           }
         ]
       },
@@ -150,42 +165,47 @@
           {
             "row": 3,
             "column": 0,
-            "value": "ITM0003"
+            "value": "Keyboard"
           },
           {
             "row": 3,
             "column": 1,
-            "value": "Gadget X"
+            "value": "Accessories"
           },
           {
             "row": 3,
             "column": 2,
-            "value": "Electronics"
+            "value": "8500"
           },
           {
             "row": 3,
             "column": 3,
-            "value": "95"
+            "value": "9200"
           },
           {
             "row": 3,
             "column": 4,
-            "value": "125.0"
+            "value": "9800"
           },
           {
             "row": 3,
             "column": 5,
-            "value": "11875.0"
+            "value": "10500"
           },
           {
             "row": 3,
             "column": 6,
-            "value": "50"
+            "value": "38000"
           },
           {
             "row": 3,
             "column": 7,
-            "value": "Supplier B"
+            "value": "45"
+          },
+          {
+            "row": 3,
+            "column": 8,
+            "value": "844"
           }
         ]
       },
@@ -195,42 +215,47 @@
           {
             "row": 4,
             "column": 0,
-            "value": "ITM0004"
+            "value": "Monitor"
           },
           {
             "row": 4,
             "column": 1,
-            "value": "Gadget Y"
-          },
-          {
-            "row": 4,
-            "column": 2,
             "value": "Electronics"
           },
           {
             "row": 4,
+            "column": 2,
+            "value": "45000"
+          },
+          {
+            "row": 4,
             "column": 3,
-            "value": "120"
+            "value": "48000"
           },
           {
             "row": 4,
             "column": 4,
-            "value": "89.99"
+            "value": "52000"
           },
           {
             "row": 4,
             "column": 5,
-            "value": "10798.8"
+            "value": "55000"
           },
           {
             "row": 4,
             "column": 6,
-            "value": "60"
+            "value": "200000"
           },
           {
             "row": 4,
             "column": 7,
-            "value": "Supplier B"
+            "value": "350"
+          },
+          {
+            "row": 4,
+            "column": 8,
+            "value": "571"
           }
         ]
       },
@@ -240,42 +265,47 @@
           {
             "row": 5,
             "column": 0,
-            "value": "ITM0005"
+            "value": "Headphones"
           },
           {
             "row": 5,
             "column": 1,
-            "value": "Tool Set"
+            "value": "Accessories"
           },
           {
             "row": 5,
             "column": 2,
-            "value": "Tools"
+            "value": "15000"
           },
           {
             "row": 5,
             "column": 3,
-            "value": "45"
+            "value": "16500"
           },
           {
             "row": 5,
             "column": 4,
-            "value": "320.0"
+            "value": "18000"
           },
           {
             "row": 5,
             "column": 5,
-            "value": "14400.0"
+            "value": "19500"
           },
           {
             "row": 5,
             "column": 6,
-            "value": "20"
+            "value": "69000"
           },
           {
             "row": 5,
             "column": 7,
-            "value": "Supplier C"
+            "value": "85"
+          },
+          {
+            "row": 5,
+            "column": 8,
+            "value": "812"
           }
         ]
       },
@@ -285,42 +315,47 @@
           {
             "row": 6,
             "column": 0,
-            "value": "ITM0006"
+            "value": "Webcam"
           },
           {
             "row": 6,
             "column": 1,
-            "value": "Component 1"
+            "value": "Electronics"
           },
           {
             "row": 6,
             "column": 2,
-            "value": "Parts"
+            "value": "18000"
           },
           {
             "row": 6,
             "column": 3,
-            "value": "520"
+            "value": "19500"
           },
           {
             "row": 6,
             "column": 4,
-            "value": "12.3"
+            "value": "21000"
           },
           {
             "row": 6,
             "column": 5,
-            "value": "6396.0"
+            "value": "22500"
           },
           {
             "row": 6,
             "column": 6,
-            "value": "200"
+            "value": "81000"
           },
           {
             "row": 6,
             "column": 7,
-            "value": "Supplier D"
+            "value": "120"
+          },
+          {
+            "row": 6,
+            "column": 8,
+            "value": "675"
           }
         ]
       },
@@ -330,42 +365,47 @@
           {
             "row": 7,
             "column": 0,
-            "value": "ITM0007"
+            "value": "USB Drive"
           },
           {
             "row": 7,
             "column": 1,
-            "value": "Component 2"
+            "value": "Storage"
           },
           {
             "row": 7,
             "column": 2,
-            "value": "Parts"
+            "value": "5000"
           },
           {
             "row": 7,
             "column": 3,
-            "value": "380"
+            "value": "5500"
           },
           {
             "row": 7,
             "column": 4,
-            "value": "18.45"
+            "value": "6000"
           },
           {
             "row": 7,
             "column": 5,
-            "value": "7011.0"
+            "value": "6500"
           },
           {
             "row": 7,
             "column": 6,
-            "value": "150"
+            "value": "23000"
           },
           {
             "row": 7,
             "column": 7,
-            "value": "Supplier D"
+            "value": "15"
+          },
+          {
+            "row": 7,
+            "column": 8,
+            "value": "1533"
           }
         ]
       },
@@ -375,807 +415,47 @@
           {
             "row": 8,
             "column": 0,
-            "value": "ITM0008"
+            "value": "Speaker"
           },
           {
             "row": 8,
             "column": 1,
-            "value": "Part A"
+            "value": "Audio"
           },
           {
             "row": 8,
             "column": 2,
-            "value": "Parts"
+            "value": "12000"
           },
           {
             "row": 8,
             "column": 3,
-            "value": "610"
+            "value": "13000"
           },
           {
             "row": 8,
             "column": 4,
-            "value": "8.9"
+            "value": "14500"
           },
           {
             "row": 8,
             "column": 5,
-            "value": "5429.0"
+            "value": "15500"
           },
           {
             "row": 8,
             "column": 6,
-            "value": "250"
+            "value": "55000"
           },
           {
             "row": 8,
             "column": 7,
-            "value": "Supplier E"
-          }
-        ]
-      },
-      {
-        "row_number": 9,
-        "cells": [
-          {
-            "row": 9,
-            "column": 0,
-            "value": "ITM0009"
-          },
-          {
-            "row": 9,
-            "column": 1,
-            "value": "Part B"
-          },
-          {
-            "row": 9,
-            "column": 2,
-            "value": "Parts"
-          },
-          {
-            "row": 9,
-            "column": 3,
-            "value": "425"
-          },
-          {
-            "row": 9,
-            "column": 4,
-            "value": "15.6"
-          },
-          {
-            "row": 9,
-            "column": 5,
-            "value": "6630.0"
-          },
-          {
-            "row": 9,
-            "column": 6,
-            "value": "180"
-          },
-          {
-            "row": 9,
-            "column": 7,
-            "value": "Supplier E"
-          }
-        ]
-      },
-      {
-        "row_number": 10,
-        "cells": [
-          {
-            "row": 10,
-            "column": 0,
-            "value": "ITM0010"
-          },
-          {
-            "row": 10,
-            "column": 1,
-            "value": "Material C"
-          },
-          {
-            "row": 10,
-            "column": 2,
-            "value": "Raw Materials"
-          },
-          {
-            "row": 10,
-            "column": 3,
-            "value": "890"
-          },
-          {
-            "row": 10,
-            "column": 4,
-            "value": "5.25"
-          },
-          {
-            "row": 10,
-            "column": 5,
-            "value": "4672.5"
-          },
-          {
-            "row": 10,
-            "column": 6,
-            "value": "400"
-          },
-          {
-            "row": 10,
-            "column": 7,
-            "value": "Supplier F"
-          }
-        ]
-      },
-      {
-        "row_number": 11,
-        "cells": [
-          {
-            "row": 11,
-            "column": 0,
-            "value": "ITM0011"
-          },
-          {
-            "row": 11,
-            "column": 1,
-            "value": "Supply D"
-          },
-          {
-            "row": 11,
-            "column": 2,
-            "value": "Supplies"
-          },
-          {
-            "row": 11,
-            "column": 3,
-            "value": "340"
-          },
-          {
-            "row": 11,
-            "column": 4,
-            "value": "22.8"
-          },
-          {
-            "row": 11,
-            "column": 5,
-            "value": "7752.0"
-          },
-          {
-            "row": 11,
-            "column": 6,
-            "value": "150"
-          },
-          {
-            "row": 11,
-            "column": 7,
-            "value": "Supplier G"
-          }
-        ]
-      },
-      {
-        "row_number": 12,
-        "cells": [
-          {
-            "row": 12,
-            "column": 0,
-            "value": "ITM0012"
-          },
-          {
-            "row": 12,
-            "column": 1,
-            "value": "Equipment E"
-          },
-          {
-            "row": 12,
-            "column": 2,
-            "value": "Equipment"
-          },
-          {
-            "row": 12,
-            "column": 3,
-            "value": "15"
-          },
-          {
-            "row": 12,
-            "column": 4,
-            "value": "1250.0"
-          },
-          {
-            "row": 12,
-            "column": 5,
-            "value": "18750.0"
-          },
-          {
-            "row": 12,
-            "column": 6,
-            "value": "10"
-          },
-          {
-            "row": 12,
-            "column": 7,
-            "value": "Supplier H"
-          }
-        ]
-      },
-      {
-        "row_number": 13,
-        "cells": [
-          {
-            "row": 13,
-            "column": 0,
-            "value": "ITM0013"
-          },
-          {
-            "row": 13,
-            "column": 1,
-            "value": "Device F"
-          },
-          {
-            "row": 13,
-            "column": 2,
-            "value": "Electronics"
-          },
-          {
-            "row": 13,
-            "column": 3,
-            "value": "78"
-          },
-          {
-            "row": 13,
-            "column": 4,
-            "value": "215.0"
-          },
-          {
-            "row": 13,
-            "column": 5,
-            "value": "16770.0"
-          },
-          {
-            "row": 13,
-            "column": 6,
-            "value": "40"
-          },
-          {
-            "row": 13,
-            "column": 7,
-            "value": "Supplier B"
-          }
-        ]
-      },
-      {
-        "row_number": 14,
-        "cells": [
-          {
-            "row": 14,
-            "column": 0,
-            "value": "ITM0014"
-          },
-          {
-            "row": 14,
-            "column": 1,
-            "value": "Unit G"
-          },
-          {
-            "row": 14,
-            "column": 2,
-            "value": "Parts"
-          },
-          {
-            "row": 14,
-            "column": 3,
-            "value": "290"
-          },
-          {
-            "row": 14,
-            "column": 4,
-            "value": "35.4"
-          },
-          {
-            "row": 14,
-            "column": 5,
-            "value": "10266.0"
-          },
-          {
-            "row": 14,
-            "column": 6,
-            "value": "120"
-          },
-          {
-            "row": 14,
-            "column": 7,
-            "value": "Supplier D"
-          }
-        ]
-      },
-      {
-        "row_number": 15,
-        "cells": [
-          {
-            "row": 15,
-            "column": 0,
-            "value": "ITM0015"
-          },
-          {
-            "row": 15,
-            "column": 1,
-            "value": "Module H"
-          },
-          {
-            "row": 15,
-            "column": 2,
-            "value": "Electronics"
-          },
-          {
-            "row": 15,
-            "column": 3,
-            "value": "165"
-          },
-          {
-            "row": 15,
-            "column": 4,
-            "value": "95.8"
-          },
-          {
-            "row": 15,
-            "column": 5,
-            "value": "15807.0"
-          },
-          {
-            "row": 15,
-            "column": 6,
-            "value": "75"
-          },
-          {
-            "row": 15,
-            "column": 7,
-            "value": "Supplier A"
-          }
-        ]
-      },
-      {
-        "row_number": 16,
-        "cells": [
-          {
-            "row": 16,
-            "column": 0,
-            "value": "ITM0016"
-          },
-          {
-            "row": 16,
-            "column": 1,
-            "value": "Assembly I"
-          },
-          {
-            "row": 16,
-            "column": 2,
-            "value": "Electronics"
-          },
-          {
-            "row": 16,
-            "column": 3,
-            "value": "88"
-          },
-          {
-            "row": 16,
-            "column": 4,
-            "value": "178.5"
-          },
-          {
-            "row": 16,
-            "column": 5,
-            "value": "15708.0"
-          },
-          {
-            "row": 16,
-            "column": 6,
-            "value": "50"
-          },
-          {
-            "row": 16,
-            "column": 7,
-            "value": "Supplier B"
-          }
-        ]
-      },
-      {
-        "row_number": 17,
-        "cells": [
-          {
-            "row": 17,
-            "column": 0,
-            "value": "ITM0017"
-          },
-          {
-            "row": 17,
-            "column": 1,
-            "value": "Kit J"
-          },
-          {
-            "row": 17,
-            "column": 2,
-            "value": "Supplies"
-          },
-          {
-            "row": 17,
-            "column": 3,
-            "value": "420"
-          },
-          {
-            "row": 17,
-            "column": 4,
-            "value": "28.9"
-          },
-          {
-            "row": 17,
-            "column": 5,
-            "value": "12138.0"
-          },
-          {
-            "row": 17,
-            "column": 6,
-            "value": "180"
-          },
-          {
-            "row": 17,
-            "column": 7,
-            "value": "Supplier G"
-          }
-        ]
-      },
-      {
-        "row_number": 18,
-        "cells": [
-          {
-            "row": 18,
-            "column": 0,
-            "value": "ITM0018"
-          },
-          {
-            "row": 18,
-            "column": 1,
-            "value": "Package K"
-          },
-          {
-            "row": 18,
-            "column": 2,
-            "value": "Raw Materials"
-          },
-          {
-            "row": 18,
-            "column": 3,
-            "value": "750"
-          },
-          {
-            "row": 18,
-            "column": 4,
-            "value": "7.65"
-          },
-          {
-            "row": 18,
-            "column": 5,
-            "value": "5737.5"
-          },
-          {
-            "row": 18,
-            "column": 6,
-            "value": "300"
-          },
-          {
-            "row": 18,
-            "column": 7,
-            "value": "Supplier F"
-          }
-        ]
-      },
-      {
-        "row_number": 19,
-        "cells": [
-          {
-            "row": 19,
-            "column": 0,
-            "value": "ITM0019"
-          },
-          {
-            "row": 19,
-            "column": 1,
-            "value": "Bundle L"
-          },
-          {
-            "row": 19,
-            "column": 2,
-            "value": "Electronics"
-          },
-          {
-            "row": 19,
-            "column": 3,
-            "value": "130"
-          },
-          {
-            "row": 19,
-            "column": 4,
-            "value": "145.0"
-          },
-          {
-            "row": 19,
-            "column": 5,
-            "value": "18850.0"
-          },
-          {
-            "row": 19,
-            "column": 6,
-            "value": "70"
-          },
-          {
-            "row": 19,
-            "column": 7,
-            "value": "Supplier A"
-          }
-        ]
-      },
-      {
-        "row_number": 20,
-        "cells": [
-          {
-            "row": 20,
-            "column": 0,
-            "value": "ITM0020"
-          },
-          {
-            "row": 20,
-            "column": 1,
-            "value": "Set M"
-          },
-          {
-            "row": 20,
-            "column": 2,
-            "value": "Tools"
-          },
-          {
-            "row": 20,
-            "column": 3,
-            "value": "67"
-          },
-          {
-            "row": 20,
-            "column": 4,
-            "value": "425.0"
-          },
-          {
-            "row": 20,
-            "column": 5,
-            "value": "28475.0"
-          },
-          {
-            "row": 20,
-            "column": 6,
-            "value": "30"
-          },
-          {
-            "row": 20,
-            "column": 7,
-            "value": "Supplier C"
-          }
-        ]
-      },
-      {
-        "row_number": 21,
-        "cells": [
-          {
-            "row": 21,
-            "column": 0,
-            "value": "ITM0021"
-          },
-          {
-            "row": 21,
-            "column": 1,
-            "value": "Product N"
-          },
-          {
-            "row": 21,
-            "column": 2,
-            "value": "Electronics"
-          },
-          {
-            "row": 21,
-            "column": 3,
-            "value": "210"
-          },
-          {
-            "row": 21,
-            "column": 4,
-            "value": "68.9"
-          },
-          {
-            "row": 21,
-            "column": 5,
-            "value": "14469.0"
-          },
-          {
-            "row": 21,
-            "column": 6,
-            "value": "100"
-          },
-          {
-            "row": 21,
-            "column": 7,
-            "value": "Supplier B"
-          }
-        ]
-      },
-      {
-        "row_number": 22,
-        "cells": [
-          {
-            "row": 22,
-            "column": 0,
-            "value": "ITM0022"
-          },
-          {
-            "row": 22,
-            "column": 1,
-            "value": "Item O"
-          },
-          {
-            "row": 22,
-            "column": 2,
-            "value": "Supplies"
-          },
-          {
-            "row": 22,
-            "column": 3,
-            "value": "385"
-          },
-          {
-            "row": 22,
-            "column": 4,
-            "value": "31.2"
-          },
-          {
-            "row": 22,
-            "column": 5,
-            "value": "12012.0"
-          },
-          {
-            "row": 22,
-            "column": 6,
-            "value": "160"
-          },
-          {
-            "row": 22,
-            "column": 7,
-            "value": "Supplier G"
-          }
-        ]
-      },
-      {
-        "row_number": 23,
-        "cells": [
-          {
-            "row": 23,
-            "column": 0,
-            "value": "ITM0023"
-          },
-          {
-            "row": 23,
-            "column": 1,
-            "value": "Good P"
-          },
-          {
-            "row": 23,
-            "column": 2,
-            "value": "Raw Materials"
-          },
-          {
-            "row": 23,
-            "column": 3,
-            "value": "640"
-          },
-          {
-            "row": 23,
-            "column": 4,
-            "value": "9.85"
-          },
-          {
-            "row": 23,
-            "column": 5,
-            "value": "6304.0"
-          },
-          {
-            "row": 23,
-            "column": 6,
-            "value": "280"
-          },
-          {
-            "row": 23,
-            "column": 7,
-            "value": "Supplier F"
-          }
-        ]
-      },
-      {
-        "row_number": 24,
-        "cells": [
-          {
-            "row": 24,
-            "column": 0,
-            "value": "ITM0024"
-          },
-          {
-            "row": 24,
-            "column": 1,
-            "value": "Article Q"
-          },
-          {
-            "row": 24,
-            "column": 2,
-            "value": "Parts"
-          },
-          {
-            "row": 24,
-            "column": 3,
-            "value": "295"
-          },
-          {
-            "row": 24,
-            "column": 4,
-            "value": "42.5"
-          },
-          {
-            "row": 24,
-            "column": 5,
-            "value": "12537.5"
-          },
-          {
-            "row": 24,
-            "column": 6,
-            "value": "130"
-          },
-          {
-            "row": 24,
-            "column": 7,
-            "value": "Supplier D"
-          }
-        ]
-      },
-      {
-        "row_number": 25,
-        "cells": [
-          {
-            "row": 25,
-            "column": 0,
-            "value": "ITM0025"
-          },
-          {
-            "row": 25,
-            "column": 1,
-            "value": "Thing R"
-          },
-          {
-            "row": 25,
-            "column": 2,
-            "value": "Equipment"
-          },
-          {
-            "row": 25,
-            "column": 3,
-            "value": "22"
-          },
-          {
-            "row": 25,
-            "column": 4,
-            "value": "980.0"
-          },
-          {
-            "row": 25,
-            "column": 5,
-            "value": "21560.0"
-          },
-          {
-            "row": 25,
-            "column": 6,
-            "value": "15"
+            "value": "95"
           },
           {
-            "row": 25,
-            "column": 7,
-            "value": "Supplier H"
+            "row": 8,
+            "column": 8,
+            "value": "579"
           }
         ]
       }

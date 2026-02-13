@@ -11,26 +11,15 @@ def generate_header_label(row_idx, text, is_numeric):
     - Non-numeric text containing alphabetic characters
     - Descriptive labels for columns
     
-    This improved logic identifies headers more accurately by:
-    1. Marking all non-numeric cells in row 0 as headers
-    2. Also considering text cells with alphabetic content as potential headers
+    This improved logic identifies headers more accurately:
+    - All non-numeric cells in row 0 are marked as headers
+    - This ensures column names are always detected as headers
     """
-    # First row non-numeric cells are almost always headers
+    # First row non-numeric cells are headers (column names)
     if row_idx == 0 and not is_numeric:
         return 1
     
-    # Text with alphabetic characters (not purely numeric) could be headers
-    # This catches column names that might appear in the first row
-    text_str = str(text).strip()
-    if text_str and not is_numeric and any(c.isalpha() for c in text_str):
-        # If it's in the first row, it's definitely a header
-        if row_idx == 0:
-            return 1
-        # Otherwise, it's more likely to be data unless it matches header patterns
-        # For now, we'll be conservative and label as data
-        return 0
-    
-    # Numeric or empty cells are data
+    # All other cells are data
     return 0
 
 
