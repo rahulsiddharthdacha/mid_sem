@@ -1,0 +1,14 @@
+artifact_uri: /Users/rahuldacha/BITS/Disserstion/mid_sem/mlruns/285176469268340556/3a03d92dc3ce4087ad024e14ea055a98/artifacts
+end_time: 1766318510401
+entry_point_name: ''
+experiment_id: '285176469268340556'
+lifecycle_stage: active
+run_id: 3a03d92dc3ce4087ad024e14ea055a98
+run_name: LogisticRegression
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766318506650
+status: 3
+tags: []
+user_id: rahuldacha

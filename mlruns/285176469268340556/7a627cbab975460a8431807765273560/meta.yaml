@@ -1,0 +1,14 @@
+artifact_uri: /Users/rahuldacha/BITS/Disserstion/mid_sem/mlruns/285176469268340556/7a627cbab975460a8431807765273560/artifacts
+end_time: 1766318549359
+entry_point_name: ''
+experiment_id: '285176469268340556'
+lifecycle_stage: active
+run_id: 7a627cbab975460a8431807765273560
+run_name: GradientBoosting
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766318514452
+status: 3
+tags: []
+user_id: rahuldacha

@@ -1,0 +1,10 @@
+artifact_location: /Users/rahuldacha/BITS/Disserstion/mid_sem/mlruns/285176469268340556/models/m-c3c4bcca600c471bb108c0185319bb5f/artifacts
+creation_timestamp: 1766318039193
+experiment_id: '285176469268340556'
+last_updated_timestamp: 1766318041539
+model_id: m-c3c4bcca600c471bb108c0185319bb5f
+model_type: null
+name: model
+source_run_id: bcc2406ca3bf4c29afa2f642de2d8c7d
+status: 2
+status_message: null

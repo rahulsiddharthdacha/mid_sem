@@ -1,0 +1,14 @@
+artifact_uri: /Users/rahuldacha/BITS/Disserstion/mid_sem/mlruns/285176469268340556/c6d311225ef64cdf868b0923022b4dcb/artifacts
+end_time: 1766318593908
+entry_point_name: ''
+experiment_id: '285176469268340556'
+lifecycle_stage: active
+run_id: c6d311225ef64cdf868b0923022b4dcb
+run_name: SVM
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766318549361
+status: 3
+tags: []
+user_id: rahuldacha

@@ -1,0 +1,10 @@
+artifact_location: /Users/rahulsiddharthdacha/Desktop/BITS/mid_sem/mlflow/282570187416666551/models/m-ae13748de3584f2a98e46e0f148afcf9/artifacts
+creation_timestamp: 1767243433529
+experiment_id: '282570187416666551'
+last_updated_timestamp: 1767243434761
+model_id: m-ae13748de3584f2a98e46e0f148afcf9
+model_type: null
+name: model
+source_run_id: 7483daa9f3aa49b9904b40ef7fc4fc12
+status: 2
+status_message: null
