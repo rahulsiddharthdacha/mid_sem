@@ -4,12 +4,13 @@ import numpy as np
 from pathlib import Path
 import sys
 import logging
+import os
+import subprocess
 
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from pipelines.ml_pipeline import MLPipeline
-from configs.config import get_config
+from features.structural_features import extract_structural_features
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -17,52 +18,50 @@ logger = logging.getLogger(__name__)
 
 # Page configuration
 st.set_page_config(
-    page_title="Insurance Premium Predictor",
+    page_title="Excel Table Detection",
     page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
 # Initialize session state
-if 'pipeline' not in st.session_state:
-    st.session_state.pipeline = None
-if 'model_trained' not in st.session_state:
-    st.session_state.model_trained = False
-if 'data_loaded' not in st.session_state:
-    st.session_state.data_loaded = False
+if 'uploaded_data' not in st.session_state:
+    st.session_state.uploaded_data = None
+if 'features_df' not in st.session_state:
+    st.session_state.features_df = None
+if 'predictions' not in st.session_state:
+    st.session_state.predictions = None
 
 def main():
     """Main application function."""
     
-    st.title("🏥 Insurance Premium Prediction System")
+    st.title("📊 Excel Financial Table Detection System")
+    st.markdown("**ML-Based Detection of Financial Tables Using Metadata Features**")
     st.markdown("---")
     
-    # Sidebar configuration
-    st.sidebar.title("Configuration")
-    config = get_config()
-    
-    # Main navigation
+    # Sidebar navigation
+    st.sidebar.title("Navigation")
     page = st.sidebar.radio(
         "Select Page",
-        ["Home", "Data Ingestion", "Feature Engineering", "Model Training", "Predictions", "Analytics"]
+        ["Home", "Upload & Detect", "Sample Data Explorer", "Feature Analysis", "Model Training", "Services Status"]
     )
     
     if page == "Home":
         show_home()
-    elif page == "Data Ingestion":
-        show_data_ingestion()
-    elif page == "Feature Engineering":
-        show_feature_engineering()
+    elif page == "Upload & Detect":
+        show_upload_detect()
+    elif page == "Sample Data Explorer":
+        show_sample_data()
+    elif page == "Feature Analysis":
+        show_feature_analysis()
     elif page == "Model Training":
         show_model_training()
-    elif page == "Predictions":
-        show_predictions()
-    elif page == "Analytics":
-        show_analytics()
+    elif page == "Services Status":
+        show_services_status()
 
 def show_home():
     """Show home page."""
-    st.header("Welcome to Insurance Premium Predictor")
+    st.header("Welcome to Excel Table Detection System")
     
     col1, col2 = st.columns(2)
     
@@ -70,294 +69,588 @@ def show_home():
         st.markdown("""
         ### About This Application
         
-        This is a comprehensive ML application for predicting insurance premiums.
+        This system uses machine learning to automatically detect and identify 
+        financial tables in Excel spreadsheets using metadata and structural features.
         
-        **Features:**
-        - 📥 Data ingestion and normalization
-        - 🔧 Advanced feature engineering
-        - 🤖 Machine learning model training
-        - 🎯 Real-time predictions
-        - 📊 Performance analytics
+        **Key Features:**
+        - 📤 Upload Excel files for analysis
+        - 🔍 Detect table headers and structure
+        - 📊 Extract structural and semantic features
+        - 🤖 ML-based classification
+        - 📈 Visualize detection results
+        - 🔬 MLflow experiment tracking
+        - 🔄 Airflow pipeline orchestration
         
-        **Supported Models:**
-        - Random Forest Regressor
-        - Gradient Boosting Regressor
-        - Linear Regression
+        **How It Works:**
+        1. **Structural Features**: Analyzes cell position, density, and formatting
+        2. **Semantic Features**: Understands cell content using NLP
+        3. **ML Classification**: Identifies headers and table regions
         """)
     
     with col2:
         st.markdown("""
         ### Getting Started
         
-        1. **Load Data**: Upload your Excel file in the Data Ingestion section
-        2. **Engineer Features**: Configure and create features
-        3. **Train Model**: Select a model and train it
-        4. **Make Predictions**: Predict on new data
-        5. **View Analytics**: Analyze model performance
+        **Quick Start:**
+        1. 📤 Go to "Upload & Detect" to analyze your Excel file
+        2. 🔍 Or explore the "Sample Data Explorer" to see examples
+        3. 📊 View "Feature Analysis" to understand the detection process
+        4. 🤖 Train models in "Model Training" section
+        5. 🔍 Check "Services Status" for MLflow and Airflow
         
-        ### Quick Stats
+        **Supported Features:**
+        - Excel formats: .xlsx, .xls
+        - Multiple sheets support
+        - Cell-level analysis
+        - Table boundary detection
+        
+        **Models Available:**
+        - Logistic Regression
+        - Random Forest
+        - Gradient Boosting
+        - Support Vector Machine (SVM)
         """)
-        
-        if st.session_state.data_loaded and st.session_state.pipeline:
-            summary = st.session_state.pipeline.get_pipeline_summary()
-            st.metric("Data Shape", f"{summary['data_shape']}")
-            st.metric("Model Status", "Trained" if st.session_state.model_trained else "Not Trained")
+    
+    st.markdown("---")
+    
+    # Stats section
+    st.subheader("📈 System Statistics")
+    col1, col2, col3, col4 = st.columns(4)
+    
+    # Check if pre-extracted features exist
+    features_path = Path(__file__).parent.parent / "features" / "features.csv"
+    if features_path.exists():
+        try:
+            features_df = pd.read_csv(features_path, nrows=1000)
+            col1.metric("Feature Dimensions", f"{features_df.shape[1]}")
+            col2.metric("Models Available", "4")
+            col3.metric("Test Datasets", "3")
+            col4.metric("Status", "✅ Ready")
+        except:
+            col1.metric("Status", "Ready")
+            col2.metric("Models", "4")
+            col3.metric("Features", "391")
+            col4.metric("Supported", "Excel")
+    else:
+        col1.metric("Status", "Ready")
+        col2.metric("Models", "4")
+        col3.metric("Features", "391")
+        col4.metric("Supported", "Excel")
 
-def show_data_ingestion():
-    """Show data ingestion page."""
-    st.header("📥 Data Ingestion")
+def show_upload_detect():
+    """Show upload and detection page."""
+    st.header("📤 Upload & Detect Tables")
     
     col1, col2 = st.columns([2, 1])
     
     with col1:
-        st.subheader("Load Data")
+        st.subheader("Upload Excel File")
         
         # File uploader
-        uploaded_file = st.file_uploader("Upload Excel file", type=['xlsx', 'xls'])
+        uploaded_file = st.file_uploader(
+            "Choose an Excel file", 
+            type=['xlsx', 'xls'],
+            help="Upload an Excel file to detect tables and headers"
+        )
         
         if uploaded_file is not None:
             try:
-                # Save uploaded file temporarily
-                temp_path = Path('/tmp') / uploaded_file.name
-                with open(temp_path, 'wb') as f:
-                    f.write(uploaded_file.getbuffer())
+                # Read the Excel file
+                df = pd.read_excel(uploaded_file)
+                st.session_state.uploaded_data = df
                 
-                # Initialize pipeline
-                st.session_state.pipeline = MLPipeline({})
+                st.success(f"✅ File uploaded successfully! Shape: {df.shape}")
                 
-                # Load data
-                data = st.session_state.pipeline.load_data(str(temp_path))
-                st.session_state.data_loaded = True
-                
-                st.success("✅ Data loaded successfully!")
-                st.dataframe(data.head(10))
-                
-                # Data statistics
-                st.subheader("Data Statistics")
-                st.write(data.describe())
+                # Display the raw data
+                st.subheader("Raw Data Preview")
+                st.dataframe(df.head(20), use_container_width=True)
                 
                 # Data info
-                st.subheader("Data Info")
-                col1, col2, col3 = st.columns(3)
-                col1.metric("Rows", data.shape[0])
-                col2.metric("Columns", data.shape[1])
-                col3.metric("Missing Values", data.isnull().sum().sum())
+                st.subheader("Data Information")
+                info_col1, info_col2, info_col3 = st.columns(3)
+                info_col1.metric("Rows", df.shape[0])
+                info_col2.metric("Columns", df.shape[1])
+                info_col3.metric("Missing Values", df.isnull().sum().sum())
+                
+                # Extract features button
+                st.markdown("---")
+                st.subheader("Feature Extraction")
+                
+                if st.button("🔍 Extract Structural Features", type="primary"):
+                    with st.spinner("Extracting features from cells..."):
+                        # Extract structural features
+                        features_df = extract_structural_features(df)
+                        st.session_state.features_df = features_df
+                        
+                        st.success(f"✅ Extracted {len(features_df)} cell-level features!")
+                        
+                        # Show feature preview
+                        st.dataframe(features_df.head(20), use_container_width=True)
+                        
+                        # Feature statistics
+                        st.subheader("Feature Statistics")
+                        stat_col1, stat_col2, stat_col3, stat_col4 = st.columns(4)
+                        stat_col1.metric("Total Cells", len(features_df))
+                        stat_col2.metric("Empty Cells", int(features_df['is_empty'].sum()))
+                        stat_col3.metric("Numeric Cells", int(features_df['is_numeric'].sum()))
+                        stat_col4.metric("Text Cells", len(features_df) - int(features_df['is_empty'].sum()) - int(features_df['is_numeric'].sum()))
+                        
+                        # Download features
+                        csv = features_df.to_csv(index=False)
+                        st.download_button(
+                            label="📥 Download Features CSV",
+                            data=csv,
+                            file_name="extracted_features.csv",
+                            mime="text/csv"
+                        )
                 
             except Exception as e:
-                st.error(f"❌ Error loading data: {e}")
+                st.error(f"❌ Error processing file: {e}")
+                logger.error(f"Error processing uploaded file: {e}")
         
         else:
-            st.info("👈 Please upload an Excel file to begin")
+            st.info("👈 Please upload an Excel file to begin analysis")
     
     with col2:
-        st.subheader("Supported Formats")
+        st.subheader("Detection Process")
         st.markdown("""
-        - .xlsx
-        - .xls
+        **Steps:**
         
-        **Data Requirements:**
-        - Columns with numeric and categorical data
-        - A target column for regression
+        1️⃣ **Upload File**
+        - Choose your Excel file
+        - Supports .xlsx and .xls
+        
+        2️⃣ **Extract Features**
+        - Cell position (row, col)
+        - Empty/numeric indicators
+        - Row and column density
+        - Cell content
+        
+        3️⃣ **Detect Tables**
+        - ML model predicts headers
+        - Identifies table regions
+        - Highlights boundaries
+        
+        **Features Extracted:**
+        - `row_idx`: Row position
+        - `col_idx`: Column position
+        - `is_empty`: Empty cell flag
+        - `is_numeric`: Numeric flag
+        - `row_density`: Fill ratio
+        - `col_density`: Fill ratio
+        - `text`: Cell content
         """)
 
-def show_feature_engineering():
-    """Show feature engineering page."""
-    st.header("🔧 Feature Engineering")
+def show_sample_data():
+    """Show sample data explorer."""
+    st.header("🔍 Sample Data Explorer")
     
-    if not st.session_state.data_loaded:
-        st.warning("⚠️ Please load data first in the Data Ingestion section")
-        return
+    # Get all sample files
+    data_dir = Path(__file__).parent.parent / "data"
+    sample_files = list(data_dir.glob("*.xlsx")) + list(data_dir.glob("*.xls"))
     
-    pipeline = st.session_state.pipeline
-    data = pipeline.data
-    
-    col1, col2 = st.columns([2, 1])
-    
-    with col1:
-        st.subheader("Feature Configuration")
+    if sample_files:
+        st.success(f"✅ Found {len(sample_files)} sample file(s)")
         
-        # Select target column
-        target_col = st.selectbox(
-            "Select Target Column",
-            data.columns,
-            help="Column to predict"
+        # File selector
+        selected_file = st.selectbox(
+            "Select a sample file to explore",
+            sample_files,
+            format_func=lambda x: x.name
         )
         
-        if st.button("Engineer Features", key="engineer_btn"):
-            try:
-                X = pipeline.engineer_features(target_col)
-                st.success("✅ Features engineered successfully!")
-                st.dataframe(X.head(10))
-                st.metric("Features Count", X.shape[1])
+        try:
+            df = pd.read_excel(selected_file)
+            
+            st.info(f"📊 Loaded: **{selected_file.name}** ({df.shape[0]} rows × {df.shape[1]} columns)")
+            
+            # Display options
+            col1, col2 = st.columns([3, 1])
+            
+            with col2:
+                st.subheader("Display Options")
+                num_rows = st.slider("Number of rows", 5, min(100, len(df)), 20)
+                show_info = st.checkbox("Show column info", value=True)
+            
+            with col1:
+                st.subheader("Data Preview")
+                st.dataframe(df.head(num_rows), use_container_width=True)
+            
+            # Statistics
+            st.markdown("---")
+            st.subheader("📊 Data Statistics")
+            
+            col1, col2, col3, col4 = st.columns(4)
+            col1.metric("Total Rows", df.shape[0])
+            col2.metric("Total Columns", df.shape[1])
+            col3.metric("Missing Values", int(df.isnull().sum().sum()))
+            col4.metric("Numeric Columns", len(df.select_dtypes(include=[np.number]).columns))
+            
+            # Column information
+            if show_info:
+                st.markdown("---")
+                st.subheader("Column Information")
                 
-            except Exception as e:
-                st.error(f"❌ Error engineering features: {e}")
+                col_info = pd.DataFrame({
+                    'Column': df.columns,
+                    'Type': df.dtypes.astype(str),
+                    'Non-Null': df.count().values,
+                    'Null': df.isnull().sum().values,
+                    'Unique': [df[col].nunique() for col in df.columns]
+                })
+                
+                st.dataframe(col_info, use_container_width=True)
+            
+            # Descriptive statistics
+            st.markdown("---")
+            st.subheader("Descriptive Statistics")
+            st.dataframe(df.describe(), use_container_width=True)
+            
+        except Exception as e:
+            st.error(f"❌ Error loading sample data: {e}")
+            logger.error(f"Error loading sample data: {e}")
+    else:
+        st.warning("⚠️ No sample data files found")
+        st.info(f"Expected location: {data_dir}")
+
+def show_feature_analysis():
+    """Show feature analysis page."""
+    st.header("📊 Feature Analysis")
     
-    with col2:
-        st.subheader("Feature Options")
-        st.markdown("""
-        - Scaling: Standard or MinMax
-        - Encoding: Label encoding for categorical
-        - Polynomial features
-        - Interaction features
+    # Load pre-extracted features if available
+    features_path = Path(__file__).parent.parent / "features" / "features.csv"
+    
+    if features_path.exists():
+        try:
+            # Load with a sample to avoid memory issues
+            with st.spinner("Loading pre-extracted features..."):
+                sample_df = pd.read_csv(features_path, nrows=2000)
+            
+            st.success(f"✅ Loaded {len(sample_df)} feature samples with {sample_df.shape[1]} columns")
+            
+            # Display feature information
+            st.subheader("Feature Overview")
+            
+            col1, col2, col3, col4 = st.columns(4)
+            col1.metric("Total Features", sample_df.shape[1])
+            col2.metric("Structural Features", 7)
+            col3.metric("Semantic Features", 384)
+            col4.metric("Sample Size", len(sample_df))
+            
+            # Show structural features
+            st.markdown("---")
+            st.subheader("Structural Features (Preview)")
+            structural_cols = ['row_idx', 'col_idx', 'is_empty', 'is_numeric', 'row_density', 'col_density']
+            if 'label' in sample_df.columns:
+                structural_cols.append('label')
+            st.dataframe(sample_df[structural_cols].head(20), use_container_width=True)
+            
+            # Feature distributions
+            st.markdown("---")
+            st.subheader("Feature Distributions")
+            
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.markdown("**Label Distribution**")
+                if 'label' in sample_df.columns:
+                    label_counts = sample_df['label'].value_counts()
+                    st.bar_chart(label_counts)
+                    st.caption(f"Headers (1): {label_counts.get(1, 0)}, Data (0): {label_counts.get(0, 0)}")
+                else:
+                    st.info("No labels found in features")
+            
+            with col2:
+                st.markdown("**Cell Type Distribution**")
+                cell_types = pd.DataFrame({
+                    'Type': ['Empty', 'Numeric', 'Text'],
+                    'Count': [
+                        int(sample_df['is_empty'].sum()),
+                        int(sample_df['is_numeric'].sum()),
+                        len(sample_df) - int(sample_df['is_empty'].sum()) - int(sample_df['is_numeric'].sum())
+                    ]
+                }).set_index('Type')
+                st.bar_chart(cell_types)
+            
+            # Density analysis
+            st.markdown("---")
+            st.subheader("Density Analysis")
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                st.markdown("**Row Density Distribution**")
+                density_counts = sample_df['row_density'].value_counts().sort_index()
+                st.line_chart(density_counts)
+            
+            with col2:
+                st.markdown("**Column Density Distribution**")
+                density_counts = sample_df['col_density'].value_counts().sort_index()
+                st.line_chart(density_counts)
+            
+        except Exception as e:
+            st.error(f"❌ Error loading features: {e}")
+            logger.error(f"Error in feature analysis: {e}")
+    else:
+        st.warning("⚠️ No pre-extracted features found")
+        st.info("""
+        To generate features, run:
+        ```bash
+        python features/feature_extractor.py
+        ```
+        
+        This will extract features from the sample data and save them to `features/features.csv`.
         """)
 
 def show_model_training():
     """Show model training page."""
-    st.header("🤖 Model Training")
+    st.header("🤖 Model Training & Evaluation")
     
-    if not st.session_state.data_loaded:
-        st.warning("⚠️ Please load data first")
-        return
+    st.markdown("""
+    Train multiple machine learning models and compare their performance using MLflow tracking.
+    """)
+    
+    # Model information
+    st.subheader("Available Models")
+    
+    models_info = {
+        "Logistic Regression": "Fast linear model, good baseline",
+        "Random Forest": "Ensemble method, handles non-linear patterns",
+        "Gradient Boosting": "Sequential ensemble, high accuracy",
+        "SVM": "Support Vector Machine for high-dimensional data"
+    }
+    
+    cols = st.columns(2)
+    for idx, (model_name, description) in enumerate(models_info.items()):
+        with cols[idx % 2]:
+            st.info(f"**{model_name}**\n\n{description}")
+    
+    st.markdown("---")
+    st.subheader("Training Process")
     
     col1, col2 = st.columns([2, 1])
     
     with col1:
-        st.subheader("Training Configuration")
+        st.markdown("""
+        **To train all models:**
         
-        # Model selection
-        model_type = st.selectbox(
-            "Select Model Type",
-            ["random_forest", "gradient_boosting", "linear_regression"]
-        )
+        1. Run the training script:
+        ```bash
+        python model/train_model.py
+        ```
         
-        # Training button
-        if st.button("Train Model", key="train_btn"):
-            try:
-                with st.spinner("Training model..."):
-                    metrics = st.session_state.pipeline.train_model(model_type)
-                    st.session_state.model_trained = True
-                
-                st.success("✅ Model trained successfully!")
-                
-                # Display metrics
-                col1, col2, col3, col4 = st.columns(4)
-                col1.metric("Train R²", f"{metrics['train_r2']:.4f}")
-                col2.metric("Test R²", f"{metrics['test_r2']:.4f}")
-                col3.metric("Test RMSE", f"{metrics['test_rmse']:.4f}")
-                col4.metric("Test MAE", f"{metrics['test_mae']:.4f}")
-                
-                # Save model
-                config = get_config()
-                st.session_state.pipeline.save_model(str(config.MODEL_PATH))
-                st.info(f"Model saved to {config.MODEL_PATH}")
-                
-            except Exception as e:
-                st.error(f"❌ Error training model: {e}")
+        This will:
+        - Load features from `features/features.csv`
+        - Train all 4 models
+        - Evaluate using accuracy and F1 score
+        - Log results to MLflow
+        - Save trained models
+        
+        **View results in MLflow:**
+        ```bash
+        mlflow ui
+        ```
+        Then open http://localhost:5000
+        """)
+        
+        # Button to trigger training (informational)
+        if st.button("📘 View Training Instructions", type="primary"):
+            st.code("""
+# Training script
+cd /home/runner/work/mid_sem/mid_sem
+python model/train_model.py
+
+# View MLflow UI
+mlflow ui --host 0.0.0.0 --port 5000
+            """, language="bash")
     
     with col2:
-        st.subheader("Model Details")
-        st.markdown(f"""
-        **Selected Model:** {model_type}
+        st.markdown("""
+        **Metrics:**
+        - Accuracy
+        - F1 Score
+        - Training Time
+        - Model Size
         
-        Model will be trained on:
-        - Features: Engineered
-        - Target: Previously selected
-        - Test Size: 20%
+        **MLflow Tracking:**
+        - Parameters
+        - Metrics
+        - Models
+        - Artifacts
+        
+        **Best Practices:**
+        - Compare models
+        - Track experiments
+        - Version models
+        - Reproduce results
         """)
+    
+    st.markdown("---")
+    st.subheader("Performance Expectations")
+    
+    st.markdown("""
+    **Note on Imbalanced Data:**
+    
+    The dataset is highly imbalanced with very few table headers (label=1) compared to 
+    data cells (label=0). This is expected in real-world table detection scenarios.
+    
+    - **Accuracy**: Will be very high due to class imbalance
+    - **F1 Score**: More meaningful metric for this task
+    - **Precision/Recall**: Consider for header detection performance
+    """)
 
-
-def show_predictions():
-    """Show predictions page."""
-    st.header("🎯 Predictions")
+def show_services_status():
+    """Show services status page."""
+    st.header("🔧 Services Status")
     
-    if not st.session_state.model_trained:
-        st.warning("⚠️ Please train a model first")
-        return
+    st.markdown("""
+    Monitor the status of MLflow and Apache Airflow services for experiment tracking 
+    and pipeline orchestration.
+    """)
     
-    st.subheader("Single Prediction")
+    st.markdown("---")
     
-    # Get feature columns
-    pipeline = st.session_state.pipeline
-    feature_cols = pipeline.features_df.columns
+    # MLflow Status
+    st.subheader("📊 MLflow - Experiment Tracking")
     
-    # Create input form
-    input_data = {}
-    cols = st.columns(3)
-    for idx, col in enumerate(feature_cols):
-        with cols[idx % 3]:
-            input_data[col] = st.number_input(
-                f"{col}",
-                value=0.0,
-                step=0.1
-            )
+    col1, col2 = st.columns([2, 1])
     
-    if st.button("Predict", key="predict_btn"):
-        try:
-            input_df = pd.DataFrame([input_data])
-            prediction = pipeline.predict(input_df)
-            
-            st.success(f"Prediction: **${prediction[0]:.2f}**")
-            
-        except Exception as e:
-            st.error(f"❌ Error making prediction: {e}")
-    
-    # Batch prediction
-    st.subheader("Batch Prediction")
-    
-    uploaded_file = st.file_uploader("Upload data for batch prediction", type=['csv', 'xlsx'])
-    
-    if uploaded_file is not None:
-        try:
-            if uploaded_file.name.endswith('.csv'):
-                batch_data = pd.read_csv(uploaded_file)
-            else:
-                batch_data = pd.read_excel(uploaded_file)
-            
-            if st.button("Predict Batch"):
-                predictions = pipeline.predict(batch_data[feature_cols])
-                
-                result_df = batch_data.copy()
-                result_df['Predicted_Premium'] = predictions
-                
-                st.success("✅ Batch predictions completed!")
-                st.dataframe(result_df)
-                
-                # Download results
-                csv = result_df.to_csv(index=False)
-                st.download_button(
-                    label="Download Results",
-                    data=csv,
-                    file_name="predictions.csv",
-                    mime="text/csv"
-                )
-                
-        except Exception as e:
-            st.error(f"❌ Error in batch prediction: {e}")
-
-
-def show_analytics():
-    """Show analytics page."""
-    st.header("📊 Analytics")
-    
-    if not st.session_state.model_trained:
-        st.warning("⚠️ Please train a model first to view analytics")
-        return
-    
-    pipeline = st.session_state.pipeline
-    metrics = pipeline.results.get('training', {})
-    
-    # Metrics overview
-    st.subheader("Model Performance Metrics")
-    
-    col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Train R²", f"{metrics.get('train_r2', 0):.4f}")
-    col2.metric("Test R²", f"{metrics.get('test_r2', 0):.4f}")
-    col3.metric("Test RMSE", f"{metrics.get('test_rmse', 0):.4f}")
-    col4.metric("Test MAE", f"{metrics.get('test_mae', 0):.4f}")
-    
-    # Feature importance
-    if hasattr(pipeline.model.model, 'feature_importances_'):
-        st.subheader("Feature Importance")
+    with col1:
+        st.markdown("""
+        **MLflow** tracks experiments, parameters, metrics, and models.
         
-        feature_importance = pipeline.model.get_feature_importance(
-            pipeline.features_df.columns.tolist()
-        )
+        **To start MLflow UI:**
+        ```bash
+        mlflow ui --host 0.0.0.0 --port 5000
+        ```
         
-        importance_df = pd.DataFrame(feature_importance.items(), columns=['Feature', 'Importance'])
-        importance_df = importance_df.sort_values('Importance', ascending=False).head(10)
+        **Access at:** http://localhost:5000
         
-        st.bar_chart(importance_df.set_index('Feature'))
+        **Features:**
+        - Compare model runs
+        - View metrics and parameters
+        - Download artifacts
+        - Model registry
+        """)
+        
+        if st.button("📋 Copy MLflow Start Command"):
+            st.code("mlflow ui --host 0.0.0.0 --port 5000", language="bash")
+    
+    with col2:
+        st.info("""
+        **Status:** Not Running
+        
+        Start MLflow to enable:
+        - Experiment tracking
+        - Model comparison
+        - Artifact storage
+        - Model versioning
+        """)
+    
+    st.markdown("---")
+    
+    # Airflow Status
+    st.subheader("🔄 Apache Airflow - Pipeline Orchestration")
+    
+    col1, col2 = st.columns([2, 1])
+    
+    with col1:
+        st.markdown("""
+        **Apache Airflow** orchestrates the Excel table detection pipeline.
+        
+        **To initialize and start Airflow:**
+        ```bash
+        # Initialize database
+        export AIRFLOW_HOME=/home/runner/work/mid_sem/mid_sem/airflow_home
+        airflow db init
+        
+        # Create admin user
+        airflow users create \\
+            --username admin \\
+            --firstname Admin \\
+            --lastname User \\
+            --role Admin \\
+            --email admin@example.com \\
+            --password admin
+        
+        # Start webserver
+        airflow webserver --port 8080 -D
+        
+        # Start scheduler
+        airflow scheduler -D
+        ```
+        
+        **Access at:** http://localhost:8080
+        """)
+        
+        if st.button("📋 Copy Airflow Start Commands"):
+            st.code("""
+export AIRFLOW_HOME=/home/runner/work/mid_sem/mid_sem/airflow_home
+airflow db init
+airflow users create --username admin --firstname Admin --lastname User --role Admin --email admin@example.com --password admin
+airflow webserver --port 8080 -D
+airflow scheduler -D
+            """, language="bash")
+    
+    with col2:
+        st.info("""
+        **Status:** Not Running
+        
+        Start Airflow to enable:
+        - Pipeline scheduling
+        - DAG visualization
+        - Task monitoring
+        - Automated workflows
+        """)
+    
+    st.markdown("---")
+    
+    # Quick Start Guide
+    st.subheader("🚀 Quick Start Guide")
+    
+    st.markdown("""
+    **1. Start MLflow:**
+    ```bash
+    mlflow ui --host 0.0.0.0 --port 5000 &
+    ```
+    
+    **2. Start Airflow (if needed):**
+    ```bash
+    export AIRFLOW_HOME=/home/runner/work/mid_sem/mid_sem/airflow_home
+    airflow db init
+    airflow webserver --port 8080 -D
+    airflow scheduler -D
+    ```
+    
+    **3. Run Training Pipeline:**
+    ```bash
+    python run_pipline.py
+    ```
+    
+    **4. Access Services:**
+    - MLflow: http://localhost:5000
+    - Airflow: http://localhost:8080 (login: admin/admin)
+    - Streamlit UI: http://localhost:8501
+    """)
+    
+    st.markdown("---")
+    st.subheader("📖 Documentation Links")
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("""
+        **MLflow:**
+        - [Official Documentation](https://mlflow.org/docs/latest/index.html)
+        - [Tracking API](https://mlflow.org/docs/latest/tracking.html)
+        - [Model Registry](https://mlflow.org/docs/latest/model-registry.html)
+        """)
+    
+    with col2:
+        st.markdown("""
+        **Apache Airflow:**
+        - [Official Documentation](https://airflow.apache.org/docs/)
+        - [Tutorial](https://airflow.apache.org/docs/apache-airflow/stable/tutorial.html)
+        - [DAG Writing](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html)
+        """)
 
 
 if __name__ == "__main__":

@@ -48,7 +48,10 @@ env/
 *.csv
 *.xlsx
 *.xls
-!insurance.csv
+!data/sample.xlsx
+!data/sales_report.xlsx
+!data/financial_statement.xlsx
+!data/inventory_report.xlsx
 
 # Models
 model/*.pkl
